@@ -1,0 +1,81 @@
+header {
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        ul {
+            background: #151515;
+            display: flex;
+            padding: 0rem;
+            list-style: none;
+            border-radius: 2px;
+            li {
+                a {
+                    display: block;
+                    padding: 1.2rem 1rem;
+                    color: $primary-color;
+                    border-bottom: 5px solid transparent;
+                    &:hover {
+                        text-decoration: none;
+                        background: $blue;
+                        transition: background-color .5s ease-in-out;
+                        border-bottom: 5px solid #1d6aa5;
+                        color: white;
+                    }
+                    &:hover i {
+                        color: white;
+                    }
+                    i {
+                        color: $blue;
+                    }
+                }
+            }
+        }
+        .left {
+            flex-grow: 1;
+        }
+        #login-left,
+        #register-left,
+        #logout-left {
+            display: none;
+        }
+        @media screen and (max-width: 700px) {
+            display: block;
+            ul {
+                display: block;
+            }
+            #nav-toggle:checked ul {
+                display: block;
+            }
+            #login-left,
+            #register-left,
+            #logout-left {
+                display: block;
+            }
+            .right {
+                display: none;
+            }
+        }
+    }
+    .description {
+        padding: 0 1rem 1.5rem 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        img {
+            width: 100%;
+            max-width: 25rem;
+        }
+        @media screen and (max-width: 700px) {
+            justify-content: center;
+            .search {
+                padding-top: .7rem;
+                padding-left: 2rem;
+            }
+            .btn-search {
+                padding-top: .77rem;
+            }
+        }
+    }
+}

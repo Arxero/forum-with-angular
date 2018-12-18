@@ -1,0 +1,17 @@
+.search form {
+    input[type=text] {
+        padding: .7rem;
+        outline: none;
+        border: none;
+        border-top-left-radius: 2px;
+        border-bottom-left-radius: 2px;
+        background: #333333;
+        color: $primary-color;
+        font-size: 1rem;
+    }
+}
+.search:hover .btn-search {
+    background: $hover-red;
+    transition: background-color .5s ease-in-out;
+}
+

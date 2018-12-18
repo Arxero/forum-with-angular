@@ -3,5 +3,19 @@
 @import './assets/styles/reset.scss';
 @import './assets/styles/variables.scss';
 @import './assets/styles/typography.scss';
+@import './assets/styles/forms.scss';
+@import './assets/styles/buttons.scss';
+@import './assets/styles/navigation.scss';
 
+
+body {
+    max-width: 65rem;
+    margin: 0 auto;
+}
+
+.site {
+    background: #232323;
+    padding-top: 1rem;
+    border-radius: 3px;
+}
 
