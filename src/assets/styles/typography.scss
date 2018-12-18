@@ -1,0 +1,40 @@
+html {
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 1.5;
+    font-size: $font-size-mobile;
+    color: $primary-color;
+    background: $primary-bg-color;
+}
+
+@media screen and (min-width: 500px) {
+    html {
+        font-size: $font-size;
+    }
+}
+
+body, table, th, td, form, input, textarea, option, select {
+	font-family: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	line-height: 1.2;
+	padding-bottom: 0.5em;
+}
+
+a {
+    color: $blue;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+p, ul, ol {
+	padding-bottom: .5rem;
+}
+
+ul, ol {
+	padding-left: 2rem;
+}

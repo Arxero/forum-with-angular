@@ -1,0 +1,25 @@
+<!-- <input [(ngModel)]='inputName' placeholder="name">
+<button>Send</button>
+<h2 *ngIf='inputName'>Your name is: {{inputName}}</h2> -->
+
+<div *ngIf='games'>
+    <ul>
+        <li *ngFor='let game of games'>
+            <h1 [class.myStyle]='isClicked'>Title: {{game.title}}</h1>
+            <br>
+            <h2>ID: {{game.id}}</h2>
+            <img [src]="game.image" alt="image">
+            <app-subscribe (notification)='notifyMe($event)' [subGame]='game'></app-subscribe>
+        </li>
+    </ul>
+    <button (click)='readMore()'> Read more</button>
+</div>
+
+<div *ngIf='isClicked'>
+    <h1>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore quaerat a dolorem necessitatibus, sint
+        voluptate
+        nemo possimus ratione inventore doloribus, eos placeat nihil ducimus, explicabo aperiam ad sit? Natus,
+        obcaecati.
+    </h1>
+</div>

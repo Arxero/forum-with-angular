@@ -1,0 +1,13 @@
+<form #form='ngForm' (ngSubmit)='login(form)'>
+    <p>
+        <label>Email Address</label>
+        <br>
+        <input type="email" name="email" ngModel required>
+    </p>
+    <p>
+        <label>Password</label>
+        <br>
+        <input type="text" name="password" ngModel required>
+    </p>
+    <input type="submit">
+</form>

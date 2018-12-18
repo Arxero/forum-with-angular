@@ -1,0 +1,15 @@
+<h1>Reactive Form</h1>
+<form [formGroup]='form' (ngSubmit)='log()'>
+    <div>
+        <label>Email Address</label>
+        <br>
+        <input type="email" formControlName='email'>
+        <div *ngIf="form.get('email').touched && form.get('email').invalid">Email is required!</div>
+    </div>
+    <p>
+        <label>Password</label>
+        <br>
+        <input type="text" formControlName='password'>
+    </p>
+    <input type="submit">
+</form>
