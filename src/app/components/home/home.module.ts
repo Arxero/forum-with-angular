@@ -3,19 +3,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'
 
 //Components
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
+import { ForumsComponent } from './forums/forums.component';
+
 
 //Modules
 import { AppRoutingModule } from 'src/app/app-routing.module';
 
-//Service
-import { AuthService } from 'src/app/core/services/auth.service';
-
 @NgModule({
     declarations: [
-        RegisterComponent,
-        LoginComponent
+        ForumsComponent
     ],
     imports: [
         CommonModule,
@@ -23,8 +19,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
         AppRoutingModule
     ],
     providers: [
-        AuthService
     ]
 
 })
-export class AuthModule { }
+export class HomeModule { }

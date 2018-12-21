@@ -7,9 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Modules
 import { AuthModule } from './components/authentication/auth.module';
+import { HomeModule } from './components/home/home.module';
 
 //Interceptors
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
+import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 
 
 //Components
@@ -25,18 +27,24 @@ import { HeaderComponent } from './components/shared/header/header.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
-    AuthModule,
     HttpClientModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule,
+    AuthModule,
+    HomeModule,
   ],
   providers: [
       {
           provide: HTTP_INTERCEPTORS,
           useClass: JwtInterceptor, 
           multi: true
-      }
+      },
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: ErrorInterceptor, 
+        multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
