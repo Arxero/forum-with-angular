@@ -1,0 +1,32 @@
+<div class="form-wrapper">
+    <form (ngSubmit)='register()' #registerForm='ngForm'>
+        <h1>Register</h1>
+        <label>Please fill in this form to create an account.</label>
+
+        <p>
+            <input [(ngModel)]='registerModel.username' #username='ngModel' name="username" minlength="3" maxlength="20" type="text" placeholder="Your username" required>
+        </p>
+        <div [hidden]='username.valid || username.pristine' class="alert-danger">Username must be at least 3 characters</div>
+
+        <p>
+            <input [(ngModel)]='registerModel.email' #email='ngModel' name="email" type="text" placeholder="Your email" required email>
+        </p>
+        <div [hidden]='email.valid || email.pristine' class="alert-danger">Email address must be valid one</div>
+
+        <p>
+            <input [(ngModel)]='registerModel.password' #password='ngModel' name='password' minlength="4" maxlength="20" type="password" placeholder="Your password" required>
+        </p>
+        <div [hidden]='password.valid || password.pristine' class="alert-danger">Password must have at least 4 characters</div>
+        
+        <p>
+            <input [(ngModel)]='registerModel.repeatPassword' #repeatPassword='ngModel' name="repeatPassword" minlength="4" maxlength="20" type="password" placeholder="Repeat password" required>
+        </p>
+        <div [hidden]='(registerModel.password == registerModel.repeatPassword) || repeatPassword.pristine' class="alert-danger">Passwords must match</div>
+
+        <p>By creating an account you agree to our <a href="#">Terms &amp; Privacy</a>.</p>
+        
+        <p>
+            <input [disabled]='registerForm.form.invalid' type="submit" value="register">
+        </p>
+    </form>
+</div>

@@ -1,0 +1,21 @@
+<div class="form-wrapper">
+    <form (ngSubmit)='login()' #loginForm='ngForm'>
+        <h1>Login</h1>
+        <label>Please fill in this form to login in your account.</label>
+        <p>
+            <input [(ngModel)]='loginModel.username' #username='ngModel' name="username" minlength="3" maxlength="20" type="text" placeholder="Your username" required>
+        </p>
+        
+        <p>
+            <input [(ngModel)]='loginModel.password' #password='ngModel' name='password' minlength="4" maxlength="20" type="password" placeholder="Your password" required>
+        </p>
+
+        <p>
+            <input [(ngModel)]='loginModel.isRemembered' #isRemembered='ngModel' type="checkbox" name="isRemembered"> Remember me
+        </p>
+        <p>
+            <input [disabled]='loginForm.form.invalid' type="submit" value="login">
+        </p>
+
+    </form>
+</div>

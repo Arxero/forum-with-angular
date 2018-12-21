@@ -2,7 +2,7 @@
 <header>
     <div class="description">
         <div class="logo">
-            <a href="/">
+            <a routerLink="/">
                 <img src="../assets/images/logos/awesome-cars-logo-626x121px.png" alt="awesome cars logo">
             </a>
         </div>
@@ -18,14 +18,14 @@
         <ul class="left">
             <li><a href="#">New Post</a></li>
             <li><a href="#">My Posts</a></li>
-            <li><a href="#" id="login-left"><i class="fa fa-power-off"></i> Login</a></li>
-            <li><a href="#" id="register-left"><i class="fa fa-edit"></i> Register</a></li>
-            <li><a href="#" id="logout-left"><i class="fa fa-power-off"></i> Logout</a></li>
+            <li *ngIf="!authService.isLoggedIn()"><a routerLink="/register" id="register-left"><i class="fa fa-edit"></i> Register</a></li>
+            <li *ngIf="!authService.isLoggedIn()"><a routerLink="/login" id="login-left"><i class="fa fa-power-off"></i> Login</a></li>
+            <li *ngIf="authService.isLoggedIn()" (click)='logout()'><a href="#" id="logout-left"><i class="fa fa-power-off"></i> Logout</a></li>
         </ul>
         <ul class="right">
-            <li><a href="#"><i class="fa fa-power-off"></i> Login</a></li>
-            <li><a href="#"><i class="fa fa-edit"></i> Register</a></li>
-            <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+            <li *ngIf="!authService.isLoggedIn()"><a routerLink="/register"><i class="fa fa-edit"></i> Register</a></li>
+            <li *ngIf="!authService.isLoggedIn()"><a routerLink="/login"><i class="fa fa-power-off"></i> Login</a></li>
+            <li *ngIf="authService.isLoggedIn()" (click)='logout()'><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
         </ul>
     </nav>
 
