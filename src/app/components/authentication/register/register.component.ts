@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisterModel } from 'src/app/core/models/auth-models/register-model';
+import { RegisterModel } from 'src/app/core/models/auth-models/register.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({

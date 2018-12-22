@@ -1,5 +1,18 @@
 .forums-wrapper {
     padding: 1.5rem 1rem 2rem 1rem;
+    &>a {
+        text-decoration: none;
+    }
+    .single-forum-title {
+        color: $link-color;
+        font-size: 1.5rem;
+        display: inline-block;
+        margin-top: 1rem;;
+        margin-bottom: 1.5rem;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
     .forum-header {
         display: flex;
         justify-content: space-between;

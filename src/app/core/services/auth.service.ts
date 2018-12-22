@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RegisterModel } from '../models/auth-models/register-model';
-import { LoginModel } from '../models/auth-models/login-model';
+import { RegisterModel } from '../models/auth-models/register.model';
+import { LoginModel } from '../models/auth-models/login.model';
 
 
 const REGISTER_URL = 'https://baas.kinvey.com/user/kid_HkUANrtxV/';

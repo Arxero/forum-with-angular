@@ -11,3 +11,26 @@
     cursor: pointer;
     // box-shadow: inset 0 0 5px #000000;
 }
+
+.btn-new-topic {
+    background: $blue;
+    color: white;
+    padding: .6rem;
+    display: inline-block;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+    border: 2px solid transparent;
+    font-size: .9rem;
+
+    &:hover {
+        border: 2px solid $blue;
+        background: transparent;
+        color: $blue;
+        transition: all .5s ease;
+    }
+
+    i {
+        margin-left: .4rem;
+        font-size: .8rem;
+    }
+}
