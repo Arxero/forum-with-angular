@@ -28,22 +28,30 @@ export class JwtInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler)
         : Observable<HttpEvent<any>> {
 
-            //setting headers for register and login requests
-            if (request.url.endsWith('/') || request.url.endsWith('login')) {
-                request = request.clone ({
-                    setHeaders: {
-                        'Content-Type': 'application/json',
-                        'Authorization' : 'Basic ' + btoa(APP_KEY + ':' + APP_SECRET)
-                    }
-                })
-            } else {
-                request = request.clone({ //always except both scenarious above
-                    setHeaders: {
+        //setting headers for register and login requests
+        if (request.url.endsWith('/') || request.url.endsWith('login')) {
+            request = request.clone({
+                setHeaders: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Basic ' + btoa(APP_KEY + ':' + APP_SECRET)
+                }
+            })
+        } else if (request.url.includes('forumId') && (request.method === 'GET')) {
+            request = request.clone({ //always except both scenarious above
+                setHeaders: {
+                    'Content-Type': 'application/json',
+                    'Authorization': "Basic " + btoa(APP_KEY + ":" + APP_MASTER_SECRET)
+                }
+            })
+        } else {
+            request = request.clone({ //always except both scenarious above
+                setHeaders: {
                     'Content-Type': 'application/json',
                     'Authorization': "Kinvey " + this.authService.user().authtoken
-                    }
-                })
-            }
+                }
+            })
+        }
+
 
 
         return next.handle(request)
@@ -66,6 +74,11 @@ export class JwtInterceptor implements HttpInterceptor {
                     localStorage.clear()
                     this.toastr.success('You are logged out', 'Success')
                     this.router.navigate(['/'])
+                } else if (res instanceof HttpResponse && res.url.endsWith('topics') && res.statusText == 'Created') {
+                    console.log(res.body.forumId);
+                    
+                    this.toastr.success('Topic created successfully', 'Success')
+                    this.router.navigate([`/view/forum/${res.body.forumId}`])
                 }
 
 

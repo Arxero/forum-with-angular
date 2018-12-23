@@ -58,6 +58,14 @@
                     font-size: .85rem;
                     padding-right: 2rem;
                 }
+                .meta {
+                    font-size: .85rem;
+                    margin-top: .3rem;
+                    a {
+                        //font-weight: bold;
+                        color: $link-color;
+                    }
+                }
             }
             .topics {
                 font-size: .9rem;

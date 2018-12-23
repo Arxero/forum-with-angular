@@ -10,13 +10,15 @@ import { ForumsComponent } from './forums/forums.component';
 import { ForumComponent } from './forum/forum.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { AddTopicComponent } from './add-topic/add-topic.component';
+import { TopicComponent } from './topic/topic.component';
 
 
 @NgModule({
     declarations: [
         ForumsComponent,
         ForumComponent,
-        AddTopicComponent
+        AddTopicComponent,
+        TopicComponent
     ],
     imports: [
         CommonModule,

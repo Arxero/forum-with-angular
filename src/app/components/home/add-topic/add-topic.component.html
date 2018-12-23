@@ -4,42 +4,42 @@
     </div>
 
     <div class="form-wrapper topic">
-        <form>
+        <form (ngSubmit)='addTopic()' #addTopicForm='ngForm'>
             <p class="post-title">Post a new topic</p>
             <p>
-                <input type="text" name="subject" placeholder="Subject">
+                <input [(ngModel)]="addTopicModel.subject" #subject='ngModel' type="text" name="subject" placeholder="Subject" required>
             </p>
 
             <p>
-                <textarea name="message" placeholder="Write something..."></textarea>
+                <textarea [(ngModel)]="addTopicModel.description" #description='ngModel' name="description" placeholder="Write something..." required></textarea>
             </p>
 
             <p>
-                <input type="submit" value="submit">
+                <input [disabled]='addTopicForm.form.invalid' type="submit" value="submit">
             </p>
         </form>
         <aside>
             <ul class="emojis">
-                <li>🙂</li>
-                <li>🙃</li>
-                <li>😃</li>
-                <li>😂</li>
-                <li>😁</li>
-                <li>😉</li>
-                <li>😎</li>
-                <li>😛</li>
-                <li>😜</li>
-                <li>😋</li>
-                <li>😊</li>
-                <li>😮</li>
-                <li>😐</li>
-                <li>😕</li>
-                <li>😢</li>
-                <li>😬</li>
-                <li>😶</li>
-                <li>🙄</li>
-                <li>😡</li>
-                <li>😈</li>
+                <li (click)='addEmoji($event)'>🙂</li>
+                <li (click)='addEmoji($event)'>🙃</li>
+                <li (click)='addEmoji($event)'>😃</li>
+                <li (click)='addEmoji($event)'>😂</li>
+                <li (click)='addEmoji($event)'>😁</li>
+                <li (click)='addEmoji($event)'>😉</li>
+                <li (click)='addEmoji($event)'>😎</li>
+                <li (click)='addEmoji($event)'>😛</li>
+                <li (click)='addEmoji($event)'>😜</li>
+                <li (click)='addEmoji($event)'>😋</li>
+                <li (click)='addEmoji($event)'>😊</li>
+                <li (click)='addEmoji($event)'>😮</li>
+                <li (click)='addEmoji($event)'>😐</li>
+                <li (click)='addEmoji($event)'>😕</li>
+                <li (click)='addEmoji($event)'>😢</li>
+                <li (click)='addEmoji($event)'>😬</li>
+                <li (click)='addEmoji($event)'>😶</li>
+                <li (click)='addEmoji($event)'>🙄</li>
+                <li (click)='addEmoji($event)'>😡</li>
+                <li (click)='addEmoji($event)'>😈</li>
             </ul>
         </aside>
     </div>

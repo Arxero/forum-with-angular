@@ -1,15 +1,30 @@
 <div class="forums-wrapper">
     <div>
-        <a class="single-forum-title" routerLink="../../forum/1">Announcements</a>
+        <a class="single-forum-title" routerLink="../../forum/{{forumId}}">{{forumName[[(forumId)]]}}</a>
     </div>
-    <a routerLink="../../forum/1/add-topic" class="btn-new-topic">New Topic<i class="fas fa-pencil-alt"></i></a>
-    <div class="forum-header">
+    <a routerLink="../../forum/{{forumId}}/add-topic" class="btn-new-topic">New Topic<i class="fas fa-pencil-alt"></i></a>
+    <div *ngIf="topics" class="forum-header">
         <div class="forum-title">Topics</div>
         <div class="forum-topics">Replies</div>
     </div>
-    <ul class="forum-content">
 
+    <div *ngIf="!topics" class="loader-wrapper">
+        <div class="loader"></div>
+    </div>
 
+    <ul class="forum-content" *ngFor="let topic of topics">
+        <li class="forum">
+            <div class="icon">
+                <i class="far fa-comment"></i>
+            </div>
+            <div class="info">
+                <div class="title"><a routerLink="../../forum/viewtopic/{{topic._id}}">{{topic.subject}}</a></div>
+                <div class="meta">
+                    by <a routerLink="#">{{topic.author}}</a> » {{topic._kmd.ect | date: 'yyyy-MM-dd HH:mm:ss'}}
+                </div>
+            </div>
+            <div class="topics">{{topic.replies}}</div>
+        </li>
     </ul>
 
 </div>

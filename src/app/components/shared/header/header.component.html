@@ -20,12 +20,12 @@
             <li><a href="#">My Posts</a></li>
             <li *ngIf="!authService.isLoggedIn()"><a routerLink="/register" id="register-left"><i class="fa fa-edit"></i> Register</a></li>
             <li *ngIf="!authService.isLoggedIn()"><a routerLink="/login" id="login-left"><i class="fa fa-power-off"></i> Login</a></li>
-            <li *ngIf="authService.isLoggedIn()" (click)='logout()'><a href="#" id="logout-left"><i class="fa fa-power-off"></i> Logout</a></li>
+            <li *ngIf="authService.isLoggedIn()" (click)='logout()'><a id="logout-left"><i class="fa fa-power-off"></i> Logout</a></li>
         </ul>
         <ul class="right">
             <li *ngIf="!authService.isLoggedIn()"><a routerLink="/register"><i class="fa fa-edit"></i> Register</a></li>
             <li *ngIf="!authService.isLoggedIn()"><a routerLink="/login"><i class="fa fa-power-off"></i> Login</a></li>
-            <li *ngIf="authService.isLoggedIn()" (click)='logout()'><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+            <li *ngIf="authService.isLoggedIn()" (click)='logout()'><a id="logout-right"><i class="fa fa-power-off"></i> Logout</a></li>
         </ul>
     </nav>
 
