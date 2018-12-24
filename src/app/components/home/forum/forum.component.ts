@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { TopicService } from 'src/app/core/services/topic.service';
 import { AddTopicModel } from 'src/app/core/models/topic-models/add-topic.model';
 import { ActivatedRoute } from '@angular/router';

@@ -34,6 +34,13 @@ body {
         -webkit-animation: spin 1s linear infinite; /* Safari */
         animation: spin 1s linear infinite;
       }
+    
+    .small {
+        width: 17px;
+        height: 17px;
+        border: 2px solid #dadada;
+        border-top: 2px solid #278FE7;
+    }
       
       /* Safari */
       @-webkit-keyframes spin {

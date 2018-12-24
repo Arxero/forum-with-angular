@@ -3,6 +3,8 @@ export class RegisterModel {
         public username: string,
         public email: string,
         public password: string,
-        public repeatPassword: string
+        public repeatPassword: string,
+        public posts: number,
+        public image?: string,
     ) {}
 }

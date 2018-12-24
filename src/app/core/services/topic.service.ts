@@ -24,4 +24,11 @@ export class TopicService {
         getAllTopics() {
             return this.http.get<AddTopicModel[]>(TOPICS_URL)
         }
+
+        getSingleTopic(id: string) {
+            return this.http.get<AddTopicModel>(TOPICS_URL + '/' + id)
+        }
+        getPostsByUser( username : string = this.authService.user().username) {
+            return this.http.get<Object[]>(TOPICS_URL + `?query={"author":"${username}"}`)
+        }
 }

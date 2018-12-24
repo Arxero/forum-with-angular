@@ -14,7 +14,12 @@
                 <div class="description">Do I have to introduce myself? - No, you don't. but it would be nice to say
                     hello and get yourself known into the community.</div>
             </div>
-            <div class="topics">21</div>
+            <div class="topics">
+                <div *ngIf="!isTopicsLoaded" class="loader-wrapper">
+                    <div class="loader small"></div>
+                </div>
+                {{allTopics['1']}}
+            </div>
         </li>
 
         <li class="forum">
@@ -29,7 +34,12 @@
                     Watch Video ➤ https://goo.gl/pKjJQ3
                 </div>
             </div>
-            <div class="topics">18</div>
+            <div *ngIf="allTopics" class="topics">
+                <div *ngIf="!isTopicsLoaded" class="loader-wrapper">
+                    <div class="loader small"></div>
+                </div>
+                {{allTopics['2']}}
+            </div>
         </li>
 
         <li class="forum">
@@ -42,7 +52,12 @@
                     Now open. Expect a closing in the pursuable future.
                 </div>
             </div>
-            <div class="topics">5</div>
+            <div *ngIf="allTopics" class="topics">
+                <div *ngIf="!isTopicsLoaded" class="loader-wrapper">
+                    <div class="loader small"></div>
+                </div>
+                {{allTopics['3']}}
+            </div>
         </li>
 
         <li class="forum">
@@ -55,21 +70,31 @@
                     You think our server could be improved? Share your suggestions here.
                 </div>
             </div>
-            <div class="topics">13</div>
+            <div *ngIf="allTopics" class="topics">
+                <div *ngIf="!isTopicsLoaded" class="loader-wrapper">
+                    <div class="loader small"></div>
+                </div>
+                {{allTopics['4']}}
+            </div>
         </li>
 
         <li class="forum">
-                <div class="icon">
-                    <i class="far fa-comment"></i>
+            <div class="icon">
+                <i class="far fa-comment"></i>
+            </div>
+            <div class="info">
+                <div class="title"><a routerLink="view/forum/5">Cafeteria</a></div>
+                <div class="description">
+                    Just waking up while drinking your coffee? Well enjoy reading about the hilarious internet!
                 </div>
-                <div class="info">
-                    <div class="title"><a routerLink="view/forum/5">Cafeteria</a></div>
-                    <div class="description">
-                            Just waking up while drinking your coffee? Well enjoy reading about the hilarious internet! 
-                    </div>
+            </div>
+            <div *ngIf="allTopics" class="topics">
+                <div *ngIf="!isTopicsLoaded" class="loader-wrapper">
+                    <div class="loader small"></div>
                 </div>
-                <div class="topics">24</div>
-            </li>
+                {{allTopics['5']}}
+            </div>
+        </li>
 
     </ul>
 
