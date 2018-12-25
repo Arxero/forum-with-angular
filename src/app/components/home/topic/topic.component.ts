@@ -12,23 +12,23 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class TopicComponent implements OnInit {
     //@Input ('singleTopic') singleTopic: AddTopicModel;
     postId: string
+    forumId: string
     topic: AddTopicModel
-    userPostsCount: number
+    user: any
     constructor(
         private route: ActivatedRoute,
         private topicService: TopicService,
         public authService: AuthService) {
-        this.postId = this.route.snapshot.params['id']
+        this.postId = this.route.snapshot.params['topicId']
+        this.forumId = this.route.snapshot.params['forumId']
     }
 
     ngOnInit() {
         this.topicService.getSingleTopic(this.postId).subscribe(data => {
             this.topic = data
-            //console.log(this.topic);
-        })
-        this.topicService.getPostsByUser().subscribe(data => {
-            this.userPostsCount = data.length
-            
+            this.authService.getUserByName(this.topic.author).subscribe(data => {
+                this.user = data
+            })
         })
     }
 

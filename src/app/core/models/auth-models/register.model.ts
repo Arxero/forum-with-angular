@@ -4,7 +4,7 @@ export class RegisterModel {
         public email: string,
         public password: string,
         public repeatPassword: string,
-        public posts: number,
+        public postsCount: number,
         public image?: string,
     ) {}
 }

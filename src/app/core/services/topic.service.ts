@@ -28,7 +28,8 @@ export class TopicService {
         getSingleTopic(id: string) {
             return this.http.get<AddTopicModel>(TOPICS_URL + '/' + id)
         }
-        getPostsByUser( username : string = this.authService.user().username) {
-            return this.http.get<Object[]>(TOPICS_URL + `?query={"author":"${username}"}`)
+
+        editPost (id: string, body: AddTopicModel) {
+            return this.http.post(TOPICS_URL + '/' + id, body)
         }
 }

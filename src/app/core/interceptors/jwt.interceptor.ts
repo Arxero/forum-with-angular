@@ -36,7 +36,7 @@ export class JwtInterceptor implements HttpInterceptor {
                     'Authorization': 'Basic ' + btoa(APP_KEY + ':' + APP_SECRET)
                 }
             })
-        } else if ((request.url.includes('forumId') || (request.url.endsWith('topics'))) && (request.method === 'GET')) {
+        } else if ( (request.url.includes('forumId') || (request.url.includes('topics')) || (request.url.includes('?query={"username":')) ) && (request.method === 'GET')) {
             request = request.clone({ //when we try to load the topics about the certain forum
                 setHeaders: {
                     'Content-Type': 'application/json',
@@ -95,14 +95,12 @@ export class JwtInterceptor implements HttpInterceptor {
                     'authtoken': data._kmd.authtoken,
                     'id': data._id,
                     'role': data._kmd.roles[0].roleId,
-                    'joined' : data._kmd.ect,
                 }))
             } else if (data._kmd.roles.length === 0) { // in case user have been an admin, but not anymore
                 sessionStorage.setItem('user', JSON.stringify({
                     'username': data.username,
                     'authtoken': data._kmd.authtoken,
                     'id': data._id,
-                    'joined' : data._kmd.ect,
                 }))
             }
         } else {
@@ -110,7 +108,6 @@ export class JwtInterceptor implements HttpInterceptor {
                 'username': data.username,
                 'authtoken': data._kmd.authtoken,
                 'id': data._id,
-                'joined' : data._kmd.ect,
             }))
         }
     }
@@ -123,14 +120,12 @@ export class JwtInterceptor implements HttpInterceptor {
                     'authtoken': data._kmd.authtoken,
                     'id': data._id,
                     'role': data._kmd.roles[0].roleId,
-                    'joined' : data._kmd.ect,
                 }))
             } else if (data._kmd.roles.length === 0) { // in case user have been an admin, but not anymore
                 localStorage.setItem('user', JSON.stringify({
                     'username': data.username,
                     'authtoken': data._kmd.authtoken,
                     'id': data._id,
-                    'joined' : data._kmd.ect,
                 }))
             }
         } else {
@@ -138,7 +133,6 @@ export class JwtInterceptor implements HttpInterceptor {
                 'username': data.username,
                 'authtoken': data._kmd.authtoken,
                 'id': data._id,
-                'joined' : data._kmd.ect,
             }))
         }
     }

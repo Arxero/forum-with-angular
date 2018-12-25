@@ -1,6 +1,6 @@
 <div class="forums-wrapper">
     <div>
-        <a *ngIf="topic" class="single-forum-title" routerLink="/view/forum/viewtopic/{{topic._id}}">{{topic.subject}}</a>
+        <a *ngIf="topic" class="single-forum-title" routerLink="/view/forum/{{forumId}}/viewtopic/{{topic._id}}">{{topic.subject}}</a>
     </div>
 
     <div *ngIf="!topic" class="loader-wrapper">
@@ -9,18 +9,33 @@
 
     <div *ngIf="topic" class="post">
         <div class="post-profile">
-            <div class="avatar">
-                <img src="https://awesomecs.syntrwave.com/download/file.php?avatar=2_1543931270.png" alt="image">
+
+            <div *ngIf="!user" class="loader-wrapper">
+                <div class="loader small"></div>
             </div>
-            <div class="user"><a routerLink="#">{{topic.author}}</a></div>
-            <div class="role" *ngIf="!authService.user().role">Member</div>
-            <div class="role" *ngIf="authService.user().role">Admin</div>
-            <div class="posts">Posts: <span *ngIf="userPostsCount">{{userPostsCount}}</span></div>
-            <div class="joined">Joined: {{authService.user().joined | date: 'yyyy-MM-dd HH:mm:ss' }}</div>
+
+            <div *ngIf="user">
+
+                <div class="avatar">
+                    <img src="{{user[0].image}}" alt="image">
+                </div>
+                <div class="user"><a routerLink="#">{{topic.author}}</a></div>
+                <div class="role"><span *ngIf="!user[0]._kmd.role">Member</span></div>
+                <!-- <div class="role" *ngIf="authService.user().role">Admin</div> -->
+                <div class="posts">Posts: <span>{{user[0].postsCount}}</span></div>
+                <div class="joined">Joined: <span>{{user[0]._kmd.ect | date: 'yyyy-MM-dd HH:mm:ss' }}</span></div>
+            </div>
         </div>
         <div class="post-content">
-            <div class="post-title"><a routerLink="#">{{topic.subject}}</a></div>
-            <div class="meta"><i class="fas fa-file-alt"></i> by <a routerLink="#">{{topic.author}}</a> » {{topic._kmd.ect | date: 'yyyy-MM-dd HH:mm:ss'}}</div>
+            <div class="post-top">
+                <div class="post-title"><a routerLink="/view/forum/{{forumId}}/viewtopic/{{topic._id}}">{{topic.subject}}</a></div>
+                <div class="post-options">
+                    <a routerLink="/view/forum/{{forumId}}/edittopic/{{topic._id}}" *ngIf="authService.isLoggedIn()"><i class="fas fa-pencil-alt" *ngIf="topic.author === authService.user().username"></i></a>
+                    <i class="fas fa-trash-alt"></i>
+                </div>
+            </div>
+            <div class="meta"><i class="fas fa-file-alt"></i> by <a routerLink="#">{{topic.author}}</a> »
+                {{topic._kmd.ect | date: 'yyyy-MM-dd HH:mm:ss'}}</div>
             <div class="post-description">{{topic.description}}</div>
         </div>
     </div>

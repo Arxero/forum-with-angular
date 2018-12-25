@@ -5,13 +5,14 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'app-add-topic',
-    templateUrl: './add-topic.component.html',
-    styleUrls: ['./add-topic.component.scss']
+    selector: 'app-edit-topic',
+    templateUrl: './edit-topic.component.html',
+    styleUrls: ['./edit-topic.component.scss']
 })
-export class AddTopicComponent implements OnInit {
-    addTopicModel: AddTopicModel
-    forumId : string
+export class EditTopicComponent implements OnInit {
+    editTopicModel: AddTopicModel
+    forumId : number
+    topicId : string
     forumName: Object = {
         '1' : 'Announcements',
         '2' : 'VIP Application',
@@ -25,21 +26,27 @@ export class AddTopicComponent implements OnInit {
         public authService: AuthService,
         public route: ActivatedRoute) {
         let author = authService.user().username
-        let forumId = this.route.snapshot.params['id']
-        this.addTopicModel = new AddTopicModel('', '', author, forumId, 0)
-
-        this.forumId = this.route.snapshot.params['id']
+        this.forumId = +this.route.snapshot.params['forumId']
+        this.editTopicModel = new AddTopicModel('', '', '', 0, 0)
+    
+        this.topicId = this.route.snapshot.params['topicId']
     }
 
     ngOnInit() {
+        this.topicService.getSingleTopic(this.topicId).subscribe(data => {
+            this.editTopicModel = data
+        })
     }
 
-    addTopic() {
-        this.topicService.createTopic(this.addTopicModel).subscribe()
-        
+    editTopic(){
+        this.topicService.editPost(this.topicId, this.editTopicModel).subscribe(() => {
+            //work in progress, scheduled for tommorow
+        })
     }
+
     addEmoji(asd) {
         let emoji = asd.target.innerText
-        this.addTopicModel.description += emoji
+        this.editTopicModel.description += emoji
     }
+
 }

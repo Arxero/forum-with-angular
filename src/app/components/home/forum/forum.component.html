@@ -18,7 +18,7 @@
                 <i class="far fa-comment"></i>
             </div>
             <div class="info">
-                <div class="title"><a routerLink="../../forum/viewtopic/{{topic._id}}">{{topic.subject}}</a></div>
+                <div class="title"><a routerLink="../../forum/{{forumId}}/viewtopic/{{topic._id}}">{{topic.subject}}</a></div>
                 <div class="meta">
                     by <a routerLink="#">{{topic.author}}</a> » {{topic._kmd.ect | date: 'yyyy-MM-dd HH:mm:ss'}}
                 </div>

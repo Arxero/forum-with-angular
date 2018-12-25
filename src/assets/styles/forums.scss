@@ -108,5 +108,35 @@
                 margin-right: .2rem;
             }
         }
+        .post-top {
+            display: flex;
+            justify-content: space-between;
+            .fa-pencil-alt {
+                // margin-right: .5rem;
+                color: #555555;
+                font-size: .9rem;
+                padding: .5rem;
+                background: #232323;
+                border-top-left-radius: 2px;
+                border-bottom-left-radius: 2px;
+                &:hover {
+                    background: $blue;
+                    transition: all .5s ease;
+                }
+            }
+            .fa-trash-alt {
+                color: #555555;
+                cursor: pointer;
+                font-size: .9rem;
+                padding: .5rem;
+                background: #232323;
+                border-top-right-radius: 2px;
+                border-bottom-right-radius: 2px;
+                &:hover {
+                    background: $blue;
+                    transition: all .5s ease;
+                }
+            }
+        }
     }
 }
