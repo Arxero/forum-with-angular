@@ -29,7 +29,10 @@ export class TopicService {
             return this.http.get<AddTopicModel>(TOPICS_URL + '/' + id)
         }
 
-        editPost (id: string, body: AddTopicModel) {
-            return this.http.post(TOPICS_URL + '/' + id, body)
+        editTopic (id: string, body: AddTopicModel) {
+            return this.http.put(TOPICS_URL + '/' + id, body)
+        }
+        deleteTopic (id: string) {
+            return this.http.delete(TOPICS_URL + '/' + id)
         }
 }

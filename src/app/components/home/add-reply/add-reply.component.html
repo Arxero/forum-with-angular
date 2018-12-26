@@ -1,0 +1,40 @@
+{{topicId | json}}
+<div class="reply-wrapper">
+    <div class="form-wrapper topic reply">
+        <form (ngSubmit)='addReply()' #addReplyForm='ngForm'>
+            <p class="post-title">Quick Reply</p>
+            <p>
+                <textarea [(ngModel)]="replyModel.content" #content='ngModel' name="content" placeholder="Write something..."
+                    required></textarea>
+            </p>
+
+            <p>
+                <input [disabled]='addReplyForm.form.invalid' type="submit" value="submit">
+            </p>
+        </form>
+        <aside>
+                <ul class="emojis">
+                    <li (click)='addEmoji($event)'>🙂</li>
+                    <li (click)='addEmoji($event)'>🙃</li>
+                    <li (click)='addEmoji($event)'>😃</li>
+                    <li (click)='addEmoji($event)'>😂</li>
+                    <li (click)='addEmoji($event)'>😁</li>
+                    <li (click)='addEmoji($event)'>😉</li>
+                    <li (click)='addEmoji($event)'>😎</li>
+                    <li (click)='addEmoji($event)'>😛</li>
+                    <li (click)='addEmoji($event)'>😜</li>
+                    <li (click)='addEmoji($event)'>😋</li>
+                    <li (click)='addEmoji($event)'>😊</li>
+                    <li (click)='addEmoji($event)'>😮</li>
+                    <li (click)='addEmoji($event)'>😐</li>
+                    <li (click)='addEmoji($event)'>😕</li>
+                    <li (click)='addEmoji($event)'>😢</li>
+                    <li (click)='addEmoji($event)'>😬</li>
+                    <li (click)='addEmoji($event)'>😶</li>
+                    <li (click)='addEmoji($event)'>🙄</li>
+                    <li (click)='addEmoji($event)'>😡</li>
+                    <li (click)='addEmoji($event)'>😈</li>
+                </ul>
+            </aside>
+    </div>
+</div>

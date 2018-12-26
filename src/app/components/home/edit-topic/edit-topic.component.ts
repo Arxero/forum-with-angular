@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AddTopicModel } from 'src/app/core/models/topic-models/add-topic.model';
 import { TopicService } from 'src/app/core/services/topic.service';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-edit-topic',
@@ -24,11 +25,10 @@ export class EditTopicComponent implements OnInit {
     constructor(
         private topicService: TopicService,
         public authService: AuthService,
-        public route: ActivatedRoute) {
-        let author = authService.user().username
-        this.forumId = +this.route.snapshot.params['forumId']
-        this.editTopicModel = new AddTopicModel('', '', '', 0, 0)
-    
+        private route: ActivatedRoute,
+        private toastr: ToastrService,
+        private router: Router) {
+        this.forumId = this.route.snapshot.params['forumId']
         this.topicId = this.route.snapshot.params['topicId']
     }
 
@@ -39,8 +39,10 @@ export class EditTopicComponent implements OnInit {
     }
 
     editTopic(){
-        this.topicService.editPost(this.topicId, this.editTopicModel).subscribe(() => {
-            //work in progress, scheduled for tommorow
+        this.topicService.editTopic(this.topicId, this.editTopicModel).subscribe(() => {
+            this.toastr.success('Topic edited successfully', 'Success')
+            this.router.navigate([`view/forum/${this.forumId}/viewtopic/${this.topicId}`])
+            
         })
     }
 

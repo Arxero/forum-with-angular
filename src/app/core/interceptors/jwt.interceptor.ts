@@ -75,14 +75,9 @@ export class JwtInterceptor implements HttpInterceptor {
                     this.toastr.success('You are logged out', 'Success')
                     this.router.navigate(['/'])
                 } else if (res instanceof HttpResponse && res.url.endsWith('topics') && res.statusText == 'Created') {
-                    console.log(res.body.forumId);
-                    
                     this.toastr.success('Topic created successfully', 'Success')
                     this.router.navigate([`/view/forum/${res.body.forumId}`])
                 }
-
-
-
             }))
     }
 

@@ -1,6 +1,8 @@
 <div class="forums-wrapper">
-    <div>
-        <a *ngIf="topic" class="single-forum-title" routerLink="/view/forum/{{forumId}}/viewtopic/{{topic._id}}">{{topic.subject}}</a>
+    <div class="nav" *ngIf="topic">
+        <a class="single-forum-title" routerLink="/view/forum/{{forumId}}">{{forumName[[(forumId)]]}}</a>
+        <i class="fas fa-angle-right"></i>
+        <a class="single-forum-title" routerLink="/view/forum/{{forumId}}/viewtopic/{{topic._id}}">{{topic.subject}}</a>
     </div>
 
     <div *ngIf="!topic" class="loader-wrapper">
@@ -30,8 +32,9 @@
             <div class="post-top">
                 <div class="post-title"><a routerLink="/view/forum/{{forumId}}/viewtopic/{{topic._id}}">{{topic.subject}}</a></div>
                 <div class="post-options">
-                    <a routerLink="/view/forum/{{forumId}}/edittopic/{{topic._id}}" *ngIf="authService.isLoggedIn()"><i class="fas fa-pencil-alt" *ngIf="topic.author === authService.user().username"></i></a>
-                    <i class="fas fa-trash-alt"></i>
+                    <a routerLink="/view/forum/{{forumId}}/edittopic/{{topic._id}}" *ngIf="authService.isLoggedIn()"><i
+                            class="fas fa-pencil-alt" *ngIf="topic.author === authService.user().username || (authService.user().role == adminRole)"></i></a>
+                    <i *ngIf="authService.user().role == adminRole" (click)='deleteTopic()' class="fas fa-trash-alt"></i>
                 </div>
             </div>
             <div class="meta"><i class="fas fa-file-alt"></i> by <a routerLink="#">{{topic.author}}</a> »
@@ -39,4 +42,5 @@
             <div class="post-description">{{topic.description}}</div>
         </div>
     </div>
+    <app-add-reply [topicId]='topicId'></app-add-reply>
 </div>

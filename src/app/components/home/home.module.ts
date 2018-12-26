@@ -12,6 +12,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { AddTopicComponent } from './add-topic/add-topic.component';
 import { TopicComponent } from './topic/topic.component';
 import { EditTopicComponent } from './edit-topic/edit-topic.component';
+import { AddReplyComponent } from './add-reply/add-reply.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { EditTopicComponent } from './edit-topic/edit-topic.component';
         ForumComponent,
         AddTopicComponent,
         TopicComponent,
-        EditTopicComponent
+        EditTopicComponent,
+        AddReplyComponent
     ],
     imports: [
         CommonModule,

@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class RegisterComponent implements OnInit {
     registerModel : RegisterModel;
     emailRegex : string = '^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
-    
+
     constructor(private authService: AuthService) {
         this.registerModel = new RegisterModel('', '', '', '', 0);
      }
@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
     }
 
     register(){
+        delete this.registerModel.repeatPassword
         this.authService.registerUser(this.registerModel).subscribe()
     }
 }

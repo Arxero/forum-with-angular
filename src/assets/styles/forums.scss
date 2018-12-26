@@ -5,7 +5,7 @@
     }
     .single-forum-title {
         color: $link-color;
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         display: inline-block;
         margin-top: 1rem;
         ;
@@ -74,7 +74,19 @@
             }
         }
     }
+    .nav {
+        .fa-angle-right {
+            padding: .5rem;
+            font-size: .9rem;
+        }
+    }
+    .reply-wrapper {
+        margin-top: 1.5rem;
+        background: $primary-bg-color;
+    }
 }
+
+
 
 .post {
     padding: 1.5rem;
@@ -102,7 +114,7 @@
         .meta {
             font-size: .84rem;
             color: #999999;
-            margin: .3rem 0 2rem 0;
+            margin: 0 0 2rem 0;
             .fa-file-alt {
                 font-size: .7rem;
                 margin-right: .2rem;
@@ -140,3 +152,4 @@
         }
     }
 }
+
