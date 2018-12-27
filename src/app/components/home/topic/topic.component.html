@@ -34,7 +34,7 @@
                 <div class="post-options">
                     <a routerLink="/view/forum/{{forumId}}/edittopic/{{topic._id}}" *ngIf="authService.isLoggedIn()"><i
                             class="fas fa-pencil-alt" *ngIf="topic.author === authService.user().username || (authService.user().role == adminRole)"></i></a>
-                    <i *ngIf="authService.user().role == adminRole" (click)='deleteTopic()' class="fas fa-trash-alt"></i>
+                    <i *ngIf="authService.isLoggedIn() && authService.user().role == adminRole" (click)='deleteTopic()' class="fas fa-trash-alt"></i>
                 </div>
             </div>
             <div class="meta"><i class="fas fa-file-alt"></i> by <a routerLink="#">{{topic.author}}</a> »
@@ -42,5 +42,5 @@
             <div class="post-description">{{topic.description}}</div>
         </div>
     </div>
-    <app-add-reply [topicId]='topicId'></app-add-reply>
+    <app-add-reply *ngIf="topic" [topicId]='topicId' [topicTitle]='topic.subject' [forumId]='forumId'></app-add-reply>
 </div>

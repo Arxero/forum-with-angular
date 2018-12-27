@@ -80,7 +80,7 @@
             font-size: .9rem;
         }
     }
-    .reply-wrapper {
+    .quick-reply-wrapper {
         margin-top: 1.5rem;
         background: $primary-bg-color;
     }
@@ -93,6 +93,7 @@
     background: $primary-bg-color;
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 1.5rem;
     a {
         color: $link-color;
     }

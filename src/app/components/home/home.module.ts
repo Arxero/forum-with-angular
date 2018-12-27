@@ -13,6 +13,9 @@ import { AddTopicComponent } from './add-topic/add-topic.component';
 import { TopicComponent } from './topic/topic.component';
 import { EditTopicComponent } from './edit-topic/edit-topic.component';
 import { AddReplyComponent } from './add-reply/add-reply.component';
+import { TopicService } from 'src/app/core/services/topic.service';
+import { ReplyService } from 'src/app/core/services/reply.service';
+import { EditReplyComponent } from './edit-reply/edit-reply.component';
 
 
 @NgModule({
@@ -22,7 +25,8 @@ import { AddReplyComponent } from './add-reply/add-reply.component';
         AddTopicComponent,
         TopicComponent,
         EditTopicComponent,
-        AddReplyComponent
+        AddReplyComponent,
+        EditReplyComponent
     ],
     imports: [
         CommonModule,
@@ -30,6 +34,8 @@ import { AddReplyComponent } from './add-reply/add-reply.component';
         HomeRoutingModule
     ],
     providers: [
+        TopicService,
+        ReplyService
     ]
 
 })

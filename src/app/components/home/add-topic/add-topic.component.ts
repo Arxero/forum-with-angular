@@ -38,8 +38,8 @@ export class AddTopicComponent implements OnInit {
         this.topicService.createTopic(this.addTopicModel).subscribe()
         
     }
-    addEmoji(asd) {
-        let emoji = asd.target.innerText
+    addEmoji(event) {
+        let emoji = event.target.innerText
         this.addTopicModel.description += emoji
     }
 }
