@@ -22,8 +22,8 @@
                     <img src="{{user[0].image}}" alt="image">
                 </div>
                 <div class="user"><a routerLink="#">{{topic.author}}</a></div>
-                <div class="role"><span *ngIf="!user[0]._kmd.role">Member</span></div>
-                <!-- <div class="role" *ngIf="authService.user().role">Admin</div> -->
+                <div class="role" *ngIf="!user[0]._kmd.roles"> <span>Member</span></div>
+                <div class="role" *ngIf="user[0]._kmd.roles"><span *ngIf="user[0]._kmd.roles[0].roleId == adminRole">Admin</span></div>
                 <div class="posts">Posts: <span>{{user[0].postsCount}}</span></div>
                 <div class="joined">Joined: <span>{{user[0]._kmd.ect | date: 'yyyy-MM-dd HH:mm:ss' }}</span></div>
             </div>

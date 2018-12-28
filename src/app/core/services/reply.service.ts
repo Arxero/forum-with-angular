@@ -28,4 +28,8 @@ export class ReplyService {
             return this.http.put(REPLY_URL + '/' + id, body)
         }
 
+        deleteReply (id: string) {
+            return this.http.delete(REPLY_URL + '/' + id)
+        }
+
 }

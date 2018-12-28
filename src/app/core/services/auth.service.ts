@@ -27,6 +27,10 @@ export class AuthService {
         return this.http.get<Object>(REGISTER_URL + `?query={"username":"${username}"}`)
     }
 
+    getUserByNameInReverse(username : string) {
+        return this.http.get<Object>(REGISTER_URL + `?query={"username":"${username}"}&sort={"_kmd":-1}`)
+    }
+
     user() {
         return JSON.parse(sessionStorage.getItem('user') || localStorage.getItem('user'))
     }

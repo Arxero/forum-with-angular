@@ -1,35 +1,35 @@
-<div class="post" *ngFor="let reply of replies | async">
-    <div class="post-profile">
-        <div *ngIf="user">
-            <div class="avatar">
-                <img src="" alt="image">
-            </div>
-            <div class="user"><a routerLink="#">{{reply.author}}</a></div>
-            <!-- <div class="role"><span *ngIf="!user[0]._kmd.role">Member</span></div> -->
-            <!-- <div class="role" *ngIf="authService.user().role">Admin</div> -->
-            <!-- <div class="posts">Posts: <span>{{user[0].postsCount}}</span></div> -->
-            <!-- <div class="joined">Joined: <span>{{user[0]._kmd.ect | date: 'yyyy-MM-dd HH:mm:ss' }}</span></div> -->
-        </div>
-    </div>
-    <div class="post-content">
-        <div class="post-top">
-            <div class="post-title"><a>{{reply.topicTitle}}</a></div>
-            <div class="post-options">
-                <a routerLink="/view/forum/{{forumId}}/edittopic/{{topicId}}/editreply/{{reply._id}}" *ngIf="authService.isLoggedIn()">
-                    <i class="fas fa-pencil-alt" *ngIf="reply.author === authService.user().username || (authService.user().role == adminRole)"></i></a>
-                <i *ngIf="authService.isLoggedIn() && authService.user().role == adminRole" (click)='deleteTopic()'
-                    class="fas fa-trash-alt"></i>
+<div class="post" *ngFor="let reply of replies; let i = index">
+        <div class="post-profile">
+            <div *ngIf="user.length > 1">
+                <div class="avatar">
+                    <img src="{{user[i].image}}" alt="image">
+                </div>
+                <div class="user"><a>{{user[i].username}}</a></div>
+                <div class="role" *ngIf="!user[i]._kmd.roles"> <span>Member</span></div>
+                <div class="role" *ngIf="user[i]._kmd.roles"><span *ngIf="user[i]._kmd.roles[0].roleId == adminRole">Admin</span></div>
+                <div class="posts">Posts: <span>{{user[i].postsCount}}</span></div>
+                <div class="joined">Joined: <span>{{user[i]._kmd.ect | date: 'yyyy-MM-dd HH:mm:ss' }}</span></div>
             </div>
         </div>
-        <div class="meta"><i class="fas fa-file-alt"></i> by <a>{{reply.author}}</a> »
-            {{reply._kmd.ect | date: 'yyyy-MM-dd HH:mm:ss'}}</div>
-        <div class="post-description">{{reply.content}}</div>
+        <div class="post-content">
+            <div class="post-top">
+                <div class="post-title"><a>{{reply.topicTitle}}</a></div>
+                <div class="post-options">
+                    <a routerLink="/view/forum/{{forumId}}/edittopic/{{topicId}}/editreply/{{reply._id}}" *ngIf="authService.isLoggedIn()">
+                        <i class="fas fa-pencil-alt" *ngIf="reply.author === authService.user().username || (authService.user().role == adminRole)"></i></a>
+                    <i *ngIf="authService.isLoggedIn() && authService.user().role == adminRole" (click)='deleteReply(reply._id)'
+                        class="fas fa-trash-alt"></i>
+                </div>
+            </div>
+            <div class="meta"><i class="fas fa-file-alt"></i> by <a>{{reply.author}}</a> »
+                {{reply._kmd.ect | date: 'yyyy-MM-dd HH:mm:ss'}}</div>
+            <div class="post-description">{{reply.content}}</div>
+        </div>
     </div>
-</div>
 
 
 
-<div class="quick-reply-wrapper" *ngIf="replies | async">
+<div class="quick-reply-wrapper" *ngIf="replies">
     <div class="form-wrapper topic reply" *ngIf="authService.isLoggedIn()">
         <form (ngSubmit)='addReply()' #addReplyForm='ngForm'>
             <p class="post-title">Quick Reply</p>
