@@ -16,6 +16,7 @@ import { AddReplyComponent } from './add-reply/add-reply.component';
 import { TopicService } from 'src/app/core/services/topic.service';
 import { ReplyService } from 'src/app/core/services/reply.service';
 import { EditReplyComponent } from './edit-reply/edit-reply.component';
+import { UsersService } from 'src/app/core/services/users.service';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { EditReplyComponent } from './edit-reply/edit-reply.component';
     ],
     providers: [
         TopicService,
-        ReplyService
+        ReplyService,
+        UsersService
     ]
 
 })

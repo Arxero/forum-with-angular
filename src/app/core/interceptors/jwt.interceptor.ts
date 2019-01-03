@@ -36,7 +36,7 @@ export class JwtInterceptor implements HttpInterceptor {
                     'Authorization': 'Basic ' + btoa(APP_KEY + ':' + APP_SECRET)
                 }
             })
-        } else if ((request.url.includes('forumId') || (request.url.includes('topics')) || (request.url.includes('?query={"username":')) || (request.url.includes('replies'))) && (request.method === 'GET')) {
+        } else if ((request.url.includes('forumId') || (request.url.includes('topics')) || (request.url.includes('?query={"username":')) || (request.url.includes('replies')) || (request.url.includes('user')) ) && (request.method === 'GET')) {
             request = request.clone({ //when we try to load the topics about the certain forum
                 setHeaders: {
                     'Content-Type': 'application/json',

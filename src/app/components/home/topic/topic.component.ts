@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TopicService } from 'src/app/core/services/topic.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { UsersService } from 'src/app/core/services/users.service';
+import { UserModel } from 'src/app/core/models/auth-models/user.model';
 
 @Component({
     selector: 'app-topic',
@@ -15,7 +17,7 @@ export class TopicComponent implements OnInit {
     topicId: string
     forumId: string
     topic: AddTopicModel
-    user: any
+    user: UserModel
     forumName: Object = {
         '1' : 'Announcements',
         '2' : 'VIP Application',
@@ -29,8 +31,9 @@ export class TopicComponent implements OnInit {
         private route: ActivatedRoute,
         private topicService: TopicService,
         public authService: AuthService,
-        public toastr: ToastrService,
-        public router: Router) {
+        private toastr: ToastrService,
+        private router: Router,
+        private userService : UsersService) {
         this.topicId = this.route.snapshot.params['topicId']
         this.forumId = this.route.snapshot.params['forumId']
     }
@@ -38,7 +41,7 @@ export class TopicComponent implements OnInit {
     ngOnInit() {
         this.topicService.getSingleTopic(this.topicId).subscribe(data => {
             this.topic = data
-            this.authService.getUserByName(this.topic.author).subscribe(data => {
+            this.userService.getUserByName(this.topic.author).subscribe(data => {
                 this.user = data
             })
         })
@@ -49,6 +52,12 @@ export class TopicComponent implements OnInit {
             this.topicService.deleteTopic(this.topicId).subscribe(() => {
                 this.toastr.success('Topic Deleted Successfully', 'Success')
                 this.router.navigate([`view/forum/${this.forumId}`])
+
+                this.userService.getUserByName(this.topic.author).subscribe(data => {
+                    this.user = data[0]
+                    this.user.postsCount -= 1
+                    this.userService.editUserById(this.user, this.user._id).subscribe()
+                })
             })
         }
     }

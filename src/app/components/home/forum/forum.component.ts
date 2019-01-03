@@ -18,7 +18,6 @@ export class ForumComponent implements OnInit {
         '4' : 'Suggestions',
         '5' : 'Cafeteria',
     }
-    
 
     constructor(private topicService: TopicService,
         private route: ActivatedRoute) {

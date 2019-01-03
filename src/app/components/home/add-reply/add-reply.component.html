@@ -1,14 +1,14 @@
 <div class="post" *ngFor="let reply of replies; let i = index">
         <div class="post-profile">
-            <div *ngIf="user.length > 1">
+            <div *ngIf="users">
                 <div class="avatar">
-                    <img src="{{user[i].image}}" alt="image">
+                    <img src="{{users[reply.author].image}}" alt="image">
                 </div>
-                <div class="user"><a>{{user[i].username}}</a></div>
-                <div class="role" *ngIf="!user[i]._kmd.roles"> <span>Member</span></div>
-                <div class="role" *ngIf="user[i]._kmd.roles"><span *ngIf="user[i]._kmd.roles[0].roleId == adminRole">Admin</span></div>
-                <div class="posts">Posts: <span>{{user[i].postsCount}}</span></div>
-                <div class="joined">Joined: <span>{{user[i]._kmd.ect | date: 'yyyy-MM-dd HH:mm:ss' }}</span></div>
+                <div class="user"><a>{{users[reply.author].username}}</a></div>
+                <div class="role"> <span *ngIf="!users[reply.author]._kmd.roles">Member</span></div>
+                <div class="role" *ngIf="users[reply.author]._kmd.roles"><span *ngIf="users[reply.author]._kmd.roles[0].roleId == adminRole">Admin</span></div>
+                <div class="posts">Posts: <span>{{users[reply.author].postsCount}}</span></div>
+                <div class="joined">Joined: <span>{{users[reply.author]._kmd.ect | date: 'yyyy-MM-dd HH:mm:ss' }}</span></div>
             </div>
         </div>
         <div class="post-content">
@@ -17,7 +17,7 @@
                 <div class="post-options">
                     <a routerLink="/view/forum/{{forumId}}/edittopic/{{topicId}}/editreply/{{reply._id}}" *ngIf="authService.isLoggedIn()">
                         <i class="fas fa-pencil-alt" *ngIf="reply.author === authService.user().username || (authService.user().role == adminRole)"></i></a>
-                    <i *ngIf="authService.isLoggedIn() && authService.user().role == adminRole" (click)='deleteReply(reply._id)'
+                    <i *ngIf="authService.isLoggedIn() && authService.user().role == adminRole" (click)='deleteReply(reply._id, reply.author)'
                         class="fas fa-trash-alt"></i>
                 </div>
             </div>
