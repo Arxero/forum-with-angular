@@ -65,6 +65,19 @@
            display: inline-block;
            margin-bottom: .3rem; 
         }
+        .user-avatar {
+            text-align: center;
+            img {
+                width: 150px;
+                margin: .5rem;
+                border-radius: 2px;
+                box-shadow: $primary-box-shadow;
+                &:hover {
+                    filter: brightness(110%);
+                    filter: contrast(110%);
+                }
+            }
+        }
 
     }
 }

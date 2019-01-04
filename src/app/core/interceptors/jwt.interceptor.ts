@@ -36,8 +36,16 @@ export class JwtInterceptor implements HttpInterceptor {
                     'Authorization': 'Basic ' + btoa(APP_KEY + ':' + APP_SECRET)
                 }
             })
-        } else if ((request.url.includes('forumId') || (request.url.includes('topics')) || (request.url.includes('?query={"username":')) || (request.url.includes('replies')) || (request.url.includes('user')) ) && (request.method === 'GET')) {
+        } else if ((request.url.includes('forumId') || (request.url.includes('topics')) || (request.url.includes('?query={"username":')) || (request.url.includes('replies')) || (request.url.includes('user'))) && (request.method === 'GET')) {
             request = request.clone({ //when we try to load the topics about the certain forum
+                setHeaders: {
+                    'Content-Type': 'application/json',
+                    'Authorization': "Basic " + btoa(APP_KEY + ":" + APP_MASTER_SECRET)
+                }
+            })
+        } else if (request.url.includes('topics') && request.method === 'PUT') {
+            //when adding a reply to an others users topic to update topics repli count
+            request = request.clone({
                 setHeaders: {
                     'Content-Type': 'application/json',
                     'Authorization': "Basic " + btoa(APP_KEY + ":" + APP_MASTER_SECRET)
@@ -50,6 +58,7 @@ export class JwtInterceptor implements HttpInterceptor {
                     'Authorization': "Kinvey " + this.authService.user().authtoken
                 }
             })
+
         }
 
 
@@ -90,12 +99,14 @@ export class JwtInterceptor implements HttpInterceptor {
                     'authtoken': data._kmd.authtoken,
                     'id': data._id,
                     'role': data._kmd.roles[0].roleId,
+                    'image': data.image,
                 }))
             } else if (data._kmd.roles.length === 0) { // in case user have been an admin, but not anymore
                 sessionStorage.setItem('user', JSON.stringify({
                     'username': data.username,
                     'authtoken': data._kmd.authtoken,
                     'id': data._id,
+                    'image': data.image,
                 }))
             }
         } else {
@@ -103,6 +114,7 @@ export class JwtInterceptor implements HttpInterceptor {
                 'username': data.username,
                 'authtoken': data._kmd.authtoken,
                 'id': data._id,
+                'image': data.image,
             }))
         }
     }
@@ -115,12 +127,14 @@ export class JwtInterceptor implements HttpInterceptor {
                     'authtoken': data._kmd.authtoken,
                     'id': data._id,
                     'role': data._kmd.roles[0].roleId,
+                    'image': data.image,
                 }))
             } else if (data._kmd.roles.length === 0) { // in case user have been an admin, but not anymore
                 localStorage.setItem('user', JSON.stringify({
                     'username': data.username,
                     'authtoken': data._kmd.authtoken,
                     'id': data._id,
+                    'image': data.image,
                 }))
             }
         } else {
@@ -128,6 +142,7 @@ export class JwtInterceptor implements HttpInterceptor {
                 'username': data.username,
                 'authtoken': data._kmd.authtoken,
                 'id': data._id,
+                'image': data.image,
             }))
         }
     }

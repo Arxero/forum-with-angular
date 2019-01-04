@@ -1,0 +1,29 @@
+<div class="form-wrapper">
+    <form (ngSubmit)='editUser()' #editProfileForm='ngForm' *ngIf="userModel">
+        <h1>Edit profile</h1>
+        <label>Please edit the fileds in this form to edit your profile.</label>
+
+        <div class="user-avatar">
+                <img src="{{userModel.image}}" alt="No Image">
+        </div>
+        <p>
+            <input [(ngModel)]='userModel.image' #image='ngModel' name="image" type="text" placeholder="Your new profile image" required>
+        </p>
+        <div [hidden]='image.valid || image.pristine' class="alert-danger">Image link must be valid one</div>
+    
+        <p>
+            <input [(ngModel)]='userModel.email' #email='ngModel' name="email" type="text" placeholder="Your new email" required email>
+        </p>
+        <div [hidden]='email.valid || email.pristine' class="alert-danger">Email address must be valid one</div>
+
+        <p>
+            <input [(ngModel)]='userModel.password' #password='ngModel' name='password' minlength="4" maxlength="20" type="password" placeholder="Your new password" required>
+        </p>
+        <div [hidden]='password.valid || password.pristine' class="alert-danger">Password must have at least 4 characters</div>
+
+
+        <p>
+            <input [disabled]='editProfileForm.form.invalid' type="submit" value="Submit">
+        </p>
+    </form>
+</div>

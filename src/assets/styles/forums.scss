@@ -105,6 +105,15 @@
         .joined {
             margin-bottom: 1rem;
         }
+        .avatar img {
+            width: 150px;
+            border-radius: 2px;
+            box-shadow: $primary-box-shadow;
+            &:hover {
+                filter: brightness(110%);
+                filter: contrast(110%);
+            }
+        }
     }
     .post-content {
         flex: 1 1 80%;
@@ -151,6 +160,48 @@
                 }
             }
         }
+    }
+}
+
+.view-user-wrapper {
+    padding: 1.5rem 1rem 2rem 1rem;
+    .user-info {
+        background: $primary-bg-color;
+        border-radius: 2px;
+        padding: 1rem;
+        font-size: .9rem;
+        
+        h1 {
+            text-align: center;
+            padding-bottom: 1rem;
+        }
+
+        img {
+            border-radius: 2px;
+            box-shadow: $primary-box-shadow;
+            &:hover {
+                filter: brightness(110%);
+                filter: contrast(110%);
+            }
+        }
+        
+        dt {
+            float: left;
+            clear: left;
+            text-align: right;
+            display: block;
+            width: 40%;
+            color: #a2a1a1;
+        }
+        dd {
+            // width: 40%;
+            padding-left: .4rem;
+            margin-bottom: .3rem;
+            overflow: hidden;
+            display: block;
+            color: #828282;
+        }
+        
     }
 }
 

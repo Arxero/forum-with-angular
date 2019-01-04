@@ -7,5 +7,6 @@ export class UserModel {
         public _acl: Object,
         public _kmd: Object,
         public postsCount?: number,
+        public image?: string,
     ) { }
 }

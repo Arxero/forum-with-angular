@@ -1,10 +1,14 @@
-<div class="post" *ngFor="let reply of replies; let i = index">
+<!-- <div *ngIf="!users" class="loader-wrapper">
+    <div class="loader"></div>
+</div> -->
+<ng-container *ngIf="users">
+    <div class="post" *ngFor="let reply of replies; let i = index">
         <div class="post-profile">
-            <div *ngIf="users">
+            <div>
                 <div class="avatar">
                     <img src="{{users[reply.author].image}}" alt="image">
                 </div>
-                <div class="user"><a>{{users[reply.author].username}}</a></div>
+                <div class="user"><a routerLink='/user/details/{{users[reply.author].username}}'>{{users[reply.author].username}}</a></div>
                 <div class="role"> <span *ngIf="!users[reply.author]._kmd.roles">Member</span></div>
                 <div class="role" *ngIf="users[reply.author]._kmd.roles"><span *ngIf="users[reply.author]._kmd.roles[0].roleId == adminRole">Admin</span></div>
                 <div class="posts">Posts: <span>{{users[reply.author].postsCount}}</span></div>
@@ -21,11 +25,12 @@
                         class="fas fa-trash-alt"></i>
                 </div>
             </div>
-            <div class="meta"><i class="fas fa-file-alt"></i> by <a>{{reply.author}}</a> »
+            <div class="meta"><i class="fas fa-file-alt"></i> by <a routerLink='/user/details/{{reply.author}}'>{{reply.author}}</a> »
                 {{reply._kmd.ect | date: 'yyyy-MM-dd HH:mm:ss'}}</div>
             <div class="post-description">{{reply.content}}</div>
         </div>
     </div>
+</ng-container>
 
 
 

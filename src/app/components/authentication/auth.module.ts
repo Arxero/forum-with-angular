@@ -11,11 +11,13 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 
 //Service
 import { AuthService } from 'src/app/core/services/auth.service';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
     declarations: [
         RegisterComponent,
-        LoginComponent
+        LoginComponent,
+        ProfileComponent
     ],
     imports: [
         CommonModule,

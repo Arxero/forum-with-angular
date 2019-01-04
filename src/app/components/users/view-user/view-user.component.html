@@ -1,0 +1,21 @@
+<div class="view-user-wrapper">
+    <div class="user-info" *ngIf="user">
+        <h1>Viewing profile - {{user.username}}</h1>
+        <dl>
+            <dt>Avatar:</dt>
+            <dd><img src="{{user.image}}" alt="image"></dd>
+            <dt>Username:</dt>
+            <dd>{{user.username}}</dd>
+            <dt>Role:</dt>
+            <dd>
+                <span *ngIf="user._kmd.roles">Admin</span>
+                <span *ngIf="!user._kmd.roles">Member</span>
+            </dd>
+            <dt>Posts:</dt>
+            <dd>{{user.postsCount}}</dd>
+            <dt>Joined:</dt>
+            <dd>{{user._kmd.ect | date: 'yyyy-MM-dd HH:mm:ss'}}</dd>
+        </dl>
+
+    </div>
+</div>

@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //Modules
 import { AuthModule } from './components/authentication/auth.module';
 import { HomeModule } from './components/home/home.module';
+import { UsersModule } from './components/users/users.module';
 
 
 //Interceptors
@@ -34,6 +35,7 @@ import { HeaderComponent } from './components/shared/header/header.component';
         ToastrModule.forRoot(),
         AuthModule,
         HomeModule,
+        UsersModule
     ],
     providers: [
         {
