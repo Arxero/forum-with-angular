@@ -1,0 +1,25 @@
+<div class="forums-wrapper">
+    <h2 *ngIf="searchResults">Search found {{searchResults.length}} matches: <a routerLink>{{searchInput}}</a></h2>
+    <div *ngIf="searchResults" class="forum-header">
+        <div class="forum-title">Topics</div>
+        <div class="forum-topics">Replies</div>
+    </div>
+
+
+    <ul class="forum-content" *ngFor="let topic of searchResults">
+        <li class="forum">
+            <div class="icon">
+                <i class="far fa-comment"></i>
+            </div>
+            <div class="info">
+                <div class="title"><a routerLink="../../forum/{{topic.forumId}}/viewtopic/{{topic._id}}">{{topic.subject}}</a></div>
+                <div class="meta">
+                    by <a routerLink="/user/details/{{topic.author}}">{{topic.author}}</a> » {{topic._kmd.ect | date:
+                    'yyyy-MM-dd HH:mm:ss'}}
+                </div>
+            </div>
+            <div class="topics">{{topic.replies}}</div>
+        </li>
+    </ul>
+
+</div>

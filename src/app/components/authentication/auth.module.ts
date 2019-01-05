@@ -12,12 +12,15 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 //Service
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ProfileComponent } from './profile/profile.component';
+import { MyTopicsComponent } from './my-topics/my-topics.component';
+
 
 @NgModule({
     declarations: [
         RegisterComponent,
         LoginComponent,
-        ProfileComponent
+        ProfileComponent,
+        MyTopicsComponent,
     ],
     imports: [
         CommonModule,

@@ -1,6 +1,6 @@
-<div class="view-user-wrapper">
-    <div class="user-info" *ngIf="user">
-        <h1>Viewing profile - {{user.username}}</h1>
+<div class="view-user-wrapper" *ngIf="user">
+    <div class="user-info">
+        <h2>Viewing profile - {{user.username}}</h2>
         <dl>
             <dt>Avatar:</dt>
             <dd><img src="{{user.image}}" alt="image"></dd>

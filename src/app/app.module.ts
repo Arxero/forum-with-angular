@@ -19,6 +19,8 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 //Components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/shared/header/header.component';
+import { FormsModule } from '@angular/forms';
+import { SearchComponent } from './components/shared/search/search.component';
 
 
 
@@ -26,6 +28,7 @@ import { HeaderComponent } from './components/shared/header/header.component';
     declarations: [
         AppComponent,
         HeaderComponent,
+        SearchComponent,
     ],
     imports: [
         BrowserModule,
@@ -35,7 +38,8 @@ import { HeaderComponent } from './components/shared/header/header.component';
         ToastrModule.forRoot(),
         AuthModule,
         HomeModule,
-        UsersModule
+        UsersModule,
+        FormsModule
     ],
     providers: [
         {

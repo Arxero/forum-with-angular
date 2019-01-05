@@ -11,6 +11,8 @@ import { HomeModule } from './components/home/home.module';
 import { AuthGuard } from './core/guards/auth.guard';
 import { ProfileComponent } from './components/authentication/profile/profile.component';
 import { UsersModule } from './components/users/users.module';
+import { SearchComponent } from './components/shared/search/search.component';
+import { MyTopicsComponent } from './components/authentication/my-topics/my-topics.component';
 
 
 const routes: Routes = [
@@ -18,6 +20,8 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+    { path: 'mytopics', component: MyTopicsComponent, canActivate: [AuthGuard] },
+    { path: 'search/:id', component: SearchComponent},
     { path: 'view', loadChildren: () => HomeModule },
     { path: 'user', loadChildren: () => UsersModule },
 ];

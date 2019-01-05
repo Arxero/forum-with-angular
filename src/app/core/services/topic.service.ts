@@ -35,4 +35,16 @@ export class TopicService {
         deleteTopic (id: string) {
             return this.http.delete(TOPICS_URL + '/' + id)
         }
+
+        searchTopic(searchInput: string) {
+            return this.http.get(TOPICS_URL + `?query={"$or":[{"subject":{"$regex":"^.*(?i)${searchInput}"}}]}`)
+            //?query={"$or":[{"name":{"$regex":"^SEARCHTERM"}},{"description":{"$regex":"^SEARCHTERM"}},{"tags":{"$regex":"^SEARCHTERM"}}]}
+            
+            //I achieved Search substring with case - insensitive with following regex.
+            //"$regex" : "^.*(?i)_strSearchText.*"
+        }
+
+        getMyTopics(username: string) {
+            return this.http.get<AddTopicModel[]>(TOPICS_URL + `?query={"author":"${username}"}`)
+        }
 }
