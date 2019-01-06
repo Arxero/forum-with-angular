@@ -13,6 +13,7 @@ import { ProfileComponent } from './components/authentication/profile/profile.co
 import { UsersModule } from './components/users/users.module';
 import { SearchComponent } from './components/shared/search/search.component';
 import { MyTopicsComponent } from './components/authentication/my-topics/my-topics.component';
+import { MyRepliesComponent } from './components/authentication/my-replies/my-replies.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: 'mytopics', component: MyTopicsComponent, canActivate: [AuthGuard] },
+    { path: 'myreplies', component: MyRepliesComponent, canActivate: [AuthGuard] },
     { path: 'search/:id', component: SearchComponent},
     { path: 'view', loadChildren: () => HomeModule },
     { path: 'user', loadChildren: () => UsersModule },

@@ -4,5 +4,6 @@ export class ReplyModel {
         public topicId: string,
         public author: string,
         public content: string,
+        public forumId: string
     ){}
 }

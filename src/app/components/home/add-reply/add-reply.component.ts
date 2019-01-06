@@ -40,12 +40,13 @@ export class AddReplyComponent implements OnInit {
         if (authService.isLoggedIn()) {
             author = authService.user().username
         }
-        this.replyModel = new ReplyModel('', '', author, '')
+        this.replyModel = new ReplyModel('', '', author, '', this.forumId)
     }
 
     ngOnInit() {
         this.replyModel.topicId = this.topicId
         this.replyModel.topicTitle = this.topicTitle
+        this.replyModel.forumId = this.forumId
         this.replyService.getCommentsByTopicId(this.topicId).subscribe(data => {
             this.replies = data
             this.userService.getAllUsers().subscribe(data => {

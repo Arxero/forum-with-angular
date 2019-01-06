@@ -32,4 +32,8 @@ export class ReplyService {
             return this.http.delete(REPLY_URL + '/' + id)
         }
 
+        getMyReplies(username: string) {
+            return this.http.get<ReplyModel[]>(REPLY_URL + `?query={"author":"${username}"}`)
+        }
+
 }

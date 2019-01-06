@@ -17,7 +17,7 @@
         </div>
         <div class="post-content">
             <div class="post-top">
-                <div class="post-title"><a>{{reply.topicTitle}}</a></div>
+                <div class="post-title"><a routerLink='/view/forum/{{forumId}}/viewtopic/{{topicId}}'>{{reply.topicTitle}}</a></div>
                 <div class="post-options">
                     <a routerLink="/view/forum/{{forumId}}/edittopic/{{topicId}}/editreply/{{reply._id}}" *ngIf="authService.isLoggedIn()">
                         <i class="fas fa-pencil-alt" *ngIf="reply.author === authService.user().username || (authService.user().role == adminRole)"></i></a>
@@ -34,7 +34,7 @@
 
 
 
-<div class="quick-reply-wrapper" *ngIf="replies">
+<div class="quick-reply-wrapper" *ngIf="replies"> 
     <div class="form-wrapper topic reply" *ngIf="authService.isLoggedIn()">
         <form (ngSubmit)='addReply()' #addReplyForm='ngForm'>
             <p class="post-title">Quick Reply</p>

@@ -36,6 +36,7 @@ export class TopicComponent implements OnInit {
         private userService : UsersService) {
         this.topicId = this.route.snapshot.params['topicId']
         this.forumId = this.route.snapshot.params['forumId']
+        
     }
 
     ngOnInit() {

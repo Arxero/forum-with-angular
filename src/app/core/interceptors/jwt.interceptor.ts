@@ -43,14 +43,6 @@ export class JwtInterceptor implements HttpInterceptor {
                     'Authorization': "Basic " + btoa(APP_KEY + ":" + APP_MASTER_SECRET)
                 }
             })
-        } else if (request.url.includes('topics') && request.method === 'PUT') {
-            //when adding a reply to an others users topic to update topics repli count
-            request = request.clone({
-                setHeaders: {
-                    'Content-Type': 'application/json',
-                    'Authorization': "Basic " + btoa(APP_KEY + ":" + APP_MASTER_SECRET)
-                }
-            })
         } else {
             request = request.clone({ //always except both scenarious above
                 setHeaders: {
@@ -58,7 +50,6 @@ export class JwtInterceptor implements HttpInterceptor {
                     'Authorization': "Kinvey " + this.authService.user().authtoken
                 }
             })
-
         }
 
 

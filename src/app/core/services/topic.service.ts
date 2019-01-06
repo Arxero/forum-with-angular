@@ -47,4 +47,5 @@ export class TopicService {
         getMyTopics(username: string) {
             return this.http.get<AddTopicModel[]>(TOPICS_URL + `?query={"author":"${username}"}`)
         }
+        
 }

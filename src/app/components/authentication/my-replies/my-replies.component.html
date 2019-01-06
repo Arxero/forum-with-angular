@@ -1,0 +1,20 @@
+<div class="myreplies-wrapper">
+    <h2>Listing your own replies</h2>
+    <div class="replies" *ngFor="let reply of replies">
+        <div class="reply">
+            <div class="reply-info">
+                <div class="reply-author">by <a routerLink='../user/details/{{reply.author}}'>{{reply.author}}</a></div>
+                <div class="reply-data">Date: {{reply._kmd.ect | date:'yyyy-MM-dd HH:mm:ss'}}</div>
+                <div class="reply-forum">Forum: <a routerLink='../view/forum/{{reply.forumId}}'>Anouncements</a></div>
+                <div class="reply-topic">Topic: <a routerLink='../view/forum/{{reply.forumId}}/viewtopic/{{reply.topicId}}'>{{reply.topicTitle}}</a></div>
+            </div>
+            <div class="reply-content">
+                <div class="reply-title"><a routerLink='../view/forum/{{reply.forumId}}/viewtopic/{{reply.topicId}}'>{{reply.topicTitle}}</a></div>
+                <div class="reply-text">{{reply.content}}</div>
+            </div>
+            <ul>
+                <li><a routerLink='../view/forum/{{reply.forumId}}/viewtopic/{{reply.topicId}}' fragment='test'>Jump to post</a><i class="fas fa-angle-right"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>

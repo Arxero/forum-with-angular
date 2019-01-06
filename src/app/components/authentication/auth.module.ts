@@ -13,6 +13,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ProfileComponent } from './profile/profile.component';
 import { MyTopicsComponent } from './my-topics/my-topics.component';
+import { MyRepliesComponent } from './my-replies/my-replies.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { MyTopicsComponent } from './my-topics/my-topics.component';
         LoginComponent,
         ProfileComponent,
         MyTopicsComponent,
+        MyRepliesComponent,
     ],
     imports: [
         CommonModule,
