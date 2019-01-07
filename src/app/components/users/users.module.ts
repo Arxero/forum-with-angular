@@ -7,10 +7,14 @@ import { UsersService } from 'src/app/core/services/users.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ViewUserComponent } from './view-user/view-user.component';
 import { UsersRoutingModule } from './users-routing.module';
+import { AllUsersComponent } from './all-users/all-users.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @NgModule({
     declarations: [
-        ViewUserComponent
+        ViewUserComponent,
+        AllUsersComponent,
+        EditUserComponent
     ],
     imports: [
         CommonModule,

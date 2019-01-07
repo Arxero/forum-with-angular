@@ -18,7 +18,6 @@ export class MyRepliesComponent implements OnInit {
     ngOnInit() {
         this.replyService.getMyReplies(this.authService.user().username).subscribe(data => {
             this.replies = data
-            console.log(this.replies);
         })
     }
 

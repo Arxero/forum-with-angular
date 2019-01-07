@@ -38,3 +38,49 @@ p, ul, ol {
 ul, ol {
 	padding-left: 2rem;
 }
+
+table {
+    border-collapse: collapse;
+    background: #333333;
+    border-radius: 2px;
+    width: 100%;
+    box-shadow: $primary-box-shadow;
+    th {
+        background: $blue;
+        padding: 1rem;
+        text-align: left;
+        color: white;
+    }
+    td {
+        text-align: left;
+        padding: 1rem;
+    }
+    tbody tr{
+        transition: transform .5s ease;
+        &:nth-child(odd) {
+            background: #222222;
+        }
+        &:hover {
+            background: #151515;
+            transform: scale(1.02);
+        }
+
+    }
+    img {
+        width: 4rem;
+        box-shadow: $primary-box-shadow;
+        border-radius: 2px;
+        transition: transform .3s ease;
+        &:hover {
+            filter: brightness(110%);
+            filter: contrast(120%);
+            transform: scale(1.2);
+        }
+    }
+    a {
+        color: $link-color;
+    }
+    i {
+        margin-right: .4rem;
+    }
+}

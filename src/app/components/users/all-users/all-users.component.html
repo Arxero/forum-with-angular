@@ -1,0 +1,33 @@
+<div class="users-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Avatar</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Posts</th>
+                <th>Joined</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td><img src="{{user.image}}" alt="image"></td>
+                <td><a routerLink="../details/{{user.username}}">{{user.username}}</a></td>
+                <td>
+                    <span *ngIf="user._kmd.roles">Admin</span>
+                    <span *ngIf="!user._kmd.roles">Member</span>
+                </td>
+                <td>{{user.postsCount}}</td>
+                <td>{{user._kmd.ect | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td><a href="mailto:{{user.email}}"><i class="fas fa-envelope"></i></a>
+                    <a routerLink="/profile" *ngIf="(authService.user().username === user.username) && !user._kmd.roles"><i class="fas fa-pencil-alt"></i></a>
+                    <a routerLink="/edit/{{user._id}}" *ngIf="authService.user().role === adminRole"><i class="fas fa-pencil-alt"></i></a>
+                    <a routerLink="" *ngIf="authService.user().role === adminRole"><i class="fas fa-angle-up"></i></a>
+                    <a routerLink="" *ngIf="authService.user().role === adminRole"><i class="fas fa-angle-down"></i></a>
+                    <a routerLink="" *ngIf="authService.user().role === adminRole"><i class="fas fa-trash-alt"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
