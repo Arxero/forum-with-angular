@@ -30,8 +30,14 @@ export class EditUserComponent implements OnInit {
     editUser() {
         this.userService.editUserById(this.userModel, this.userModel._id).subscribe(() => {
             this.toastr.success(`User ${this.userModel.username} edited successfully`, 'Success')
-            this.router.navigate(['/user/all'])
+            if (this.userModel._kmd['roles']) {
+                this.router.navigate(['/login'])
+                sessionStorage.clear()
+                localStorage.clear()
+            } else {
+                this.router.navigate(['/user/all'])
+            }
         })
     }
-
+    
 }

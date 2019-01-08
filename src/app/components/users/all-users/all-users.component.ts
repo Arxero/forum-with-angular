@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/core/services/users.service';
 import { UserModel } from 'src/app/core/models/auth-models/user.model';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-all-users',
@@ -14,7 +16,9 @@ export class AllUsersComponent implements OnInit {
 
     constructor(
         private userService: UsersService,
-        public authService: AuthService,) { }
+        public authService: AuthService,
+        private toastr: ToastrService,
+        private router: Router) { }
 
     ngOnInit() {
         this.userService.getAllUsers().subscribe(data => {
@@ -22,6 +26,31 @@ export class AllUsersComponent implements OnInit {
         })
     }
 
-    
+    adminUser(selectedUser: UserModel) {
+        if (confirm(`Make user ${selectedUser.username} an admin?`)) {
+            this.userService.adminUserById(selectedUser._id).subscribe(() => {
+                this.toastr.success(`${selectedUser.username} is an admin now`, 'Success')
+                this.router.navigate(['/user/all'])
+            })
+        }
+    }
+
+    unAdminUser(selectedUser: UserModel) {
+        if (confirm(`Remove admin from user ${selectedUser.username}?`)) {
+            this.userService.unAdminUser(selectedUser._id).subscribe(() => {
+                this.toastr.success(`${selectedUser.username} is a member now`, 'Success')
+                this.router.navigate(['/user/all'])
+            })
+        }
+    }
+
+    deleteUser(selectedUser) {
+        if (confirm(`DELETE user ${selectedUser.username}?`)) {
+            this.userService.deleteUser(selectedUser._id).subscribe(() => {
+                this.toastr.success(`User ${selectedUser.username} Deleted Successfully!`, 'Success!')
+                this.router.navigate(['/user/all'])
+            })
+        }
+    }
 
 }

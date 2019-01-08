@@ -42,6 +42,10 @@ export class TopicComponent implements OnInit {
     ngOnInit() {
         this.topicService.getSingleTopic(this.topicId).subscribe(data => {
             this.topic = data
+            // this.topic.description = this.topic.description.replace(/[\r\n]+/, '<br>')
+            this.topic.description = this.topic.description.replace(new RegExp('\n', 'g'), "<br />")
+            // console.log(this.topic.description);
+            
             this.userService.getUserByName(this.topic.author).subscribe(data => {
                 this.user = data
             })

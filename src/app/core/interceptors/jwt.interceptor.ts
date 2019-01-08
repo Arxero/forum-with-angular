@@ -15,7 +15,7 @@ import { AuthService } from '../services/auth.service';
 const APP_KEY = 'kid_HkUANrtxV'
 const APP_SECRET = '2ae495c1e2924ce8b81a5a730d4021be'
 const APP_MASTER_SECRET = '06a4d33a83f6460eabe479f71a977d41'
-const ADMIN_ROLE = ''
+const ADMIN_ROLE = 'edcd0c4e-6625-4896-bacb-e8ea4c2f8e91'
 
 
 @Injectable()
@@ -36,7 +36,7 @@ export class JwtInterceptor implements HttpInterceptor {
                     'Authorization': 'Basic ' + btoa(APP_KEY + ':' + APP_SECRET)
                 }
             })
-        } else if ((request.url.includes('forumId') || (request.url.includes('topics')) || (request.url.includes('?query={"username":')) || (request.url.includes('replies')) || (request.url.includes('user'))) && (request.method === 'GET')) {
+        } else if ( request.url.includes('forumId') || request.url.includes('topics') || request.url.includes('?query={"username":') || request.url.includes('replies') || (request.url.includes('user') && !request.url.endsWith('_logout')) || request.url.endsWith(ADMIN_ROLE) && request.method === 'GET') {
             request = request.clone({ //when we try to load the topics about the certain forum
                 setHeaders: {
                     'Content-Type': 'application/json',

@@ -21,7 +21,7 @@ export class UsersService {
         return this.http.get<UserModel>(USER_URL + '/' + `?query={"username":"${username}"}`)
     }
 
-    getUserById (id: string) {
+    getUserById(id: string) {
         return this.http.get<UserModel>(USER_URL + '/' + id)
     }
 
@@ -29,5 +29,16 @@ export class UsersService {
         return this.http.put(USER_URL + '/' + id, body)
     }
 
+    adminUserById(id: string, body: Object = {}) {
+        return this.http.put(USER_URL + '/' + id + '/roles/' + this.authService.user().role, body)
+    }
+
+    unAdminUser(id: string, body: Object = {}) {
+        return this.http.delete(USER_URL + '/' + id + '/roles/' + this.authService.user().role, body)
+    }
+
+    deleteUser(id: string) {
+        return this.http.delete(USER_URL + '/' + id + '?hard=true')
+    }
 
 }
