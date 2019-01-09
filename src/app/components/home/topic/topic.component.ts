@@ -26,6 +26,9 @@ export class TopicComponent implements OnInit {
         '5' : 'Cafeteria',
     }
     adminRole: string = 'edcd0c4e-6625-4896-bacb-e8ea4c2f8e91'
+    urlRegex: any = new RegExp(/(?<!])https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g)
+    imageRegexWithTags: any = new RegExp(/\[img]https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)\[\/img]/g)
+    imageRegexWithoutTags: any = new RegExp(/(?<=\[img])https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)(?=\[\/img])/g)
 
     constructor(
         private route: ActivatedRoute,
@@ -43,9 +46,30 @@ export class TopicComponent implements OnInit {
         this.topicService.getSingleTopic(this.topicId).subscribe(data => {
             this.topic = data
             // this.topic.description = this.topic.description.replace(/[\r\n]+/, '<br>')
-            this.topic.description = this.topic.description.replace(new RegExp('\n', 'g'), "<br />")
-            // console.log(this.topic.description);
+            this.topic.description = this.topic.description.replace(new RegExp('\n', 'g'), "<br/>")
+            this.topic.description.match(this.urlRegex).map(url => {
+                this.topic.description = this.topic.description.replace(url, `<a href=${url}>${url}</a>`)
+            })
+            this.topic.description.match(this.imageRegexWithTags).map(imageUrlWithTags => {
+                let imageUrlWithoutTags = imageUrlWithTags.match(this.imageRegexWithoutTags)[0]
+                console.log(imageUrlWithoutTags);
+                
+                this.topic.description = this.topic.description.replace(imageUrlWithTags, `<img src="${imageUrlWithoutTags}" alt="image" class="post-image">`)
+            })
+            // this.topic.description.match(this.imageRegex).map(matchedImage => {
+                
+            //     let linkImage = matchedImage.match(this.urlRegex)
+            //     console.log(matchedImage + '');
+
+            //     this.topic.description = this.topic.description.replace(matchedImage, `<img src="${linkImage[0]}" alt="image" class="post-image">`)
+            // })
+
+            //let matchedImage = this.topic.description.match(this.imageRegex)
+            //let linkImage = matchedImage.match(this.urlRegex)
+            //this.topic.description = this.topic.description.replace(matchedImage, `<img src="${linkImage}" alt="image" class="post-image">`)
+            //console.log(matchedImage);
             
+            //this.topic.description = this.topic.description.replace(matchedUrl, `<a href=${matchedUrl}>${matchedUrl}</a>`)
             this.userService.getUserByName(this.topic.author).subscribe(data => {
                 this.user = data
             })
