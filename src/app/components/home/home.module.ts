@@ -17,6 +17,7 @@ import { TopicService } from 'src/app/core/services/topic.service';
 import { ReplyService } from 'src/app/core/services/reply.service';
 import { EditReplyComponent } from './edit-reply/edit-reply.component';
 import { UsersService } from 'src/app/core/services/users.service';
+import { SafePipe } from 'src/app/core/pipes/safe.pipe';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { UsersService } from 'src/app/core/services/users.service';
         TopicComponent,
         EditTopicComponent,
         AddReplyComponent,
-        EditReplyComponent
+        EditReplyComponent,
+        SafePipe
     ],
     imports: [
         CommonModule,

@@ -39,7 +39,7 @@
             </div>
             <div class="meta"><i class="fas fa-file-alt"></i> by <a routerLink="/user/details/{{topic.author}}">{{topic.author}}</a> »
                 {{topic._kmd.ect | date: 'yyyy-MM-dd HH:mm:ss'}}</div>
-            <div class="post-description" [innerHTML]='topic.description'></div>
+            <div class="post-description" [innerHTML]='topic.description | safe: "html"'></div>
         </div>
     </div>
     <app-add-reply *ngIf="topic" [topicId]='topicId' [topicTitle]='topic.subject' [forumId]='forumId'></app-add-reply>
