@@ -3,12 +3,25 @@
         <a class="single-forum-title" routerLink="../../../forum/{{forumId}}">{{forumName[[(forumId)]]}}</a>
     </div>
 
+    <div class="preview-wrapper">
+        <div class="preview">
+            <div class="preview-title">Preview: {{addTopicModel.subject}}</div>
+            <div class="preview-content" [innerHTML]='addTopicModel.description | safe: "html"'></div>
+        </div>
+    </div>
+
     <div class="form-wrapper topic">
         <form (ngSubmit)='addTopic()' #addTopicForm='ngForm'>
             <p class="post-title">Post a new topic</p>
             <p>
                 <input [(ngModel)]="addTopicModel.subject" #subject='ngModel' type="text" name="subject" placeholder="Subject" required>
             </p>
+            <div class="bbcode">
+                    <i (click)='insertImageTags()' class="fas fa-image" title="Insert image: [img]http://image_url[/img]"></i>
+                    <i (click)='insertVideoTags()' class="fas fa-tv" title="Insert video: [video]http://video_url[/video]"></i>
+                    <i (click)='insertAudioTags()' class="fas fa-music" title="Insert audio: [audio]http://audio_url[/audio]"></i>
+                    <i (click)='convertBBCode()' class="far fa-eye" title="Preview your post"></i>
+            </div>
 
             <p>
                 <textarea [(ngModel)]="addTopicModel.description" #description='ngModel' name="description" placeholder="Write something..." required></textarea>

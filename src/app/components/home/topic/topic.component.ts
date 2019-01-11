@@ -44,6 +44,11 @@ export class TopicComponent implements OnInit {
     ngOnInit() {
         this.topicService.getSingleTopic(this.topicId).subscribe(data => {
             this.topic = data
+
+            this.userService.getUserByName(this.topic.author).subscribe(data => {
+                this.user = data
+            })
+
             //looking for new lines and if there is replace it with break
             this.topic.description = this.topic.description.replace(new RegExp('\n', 'g'), "<br/>")
 
@@ -85,18 +90,15 @@ export class TopicComponent implements OnInit {
             }
 
             //looking for youtube url in order to embed the video directly
-            let youtubeUrlRegex = new RegExp(/<a href=https:\/\/www.youtube.com\/.+?>.+<\/a>/g)
+            let youtubeUrlRegex = new RegExp(/(?<=(<a href=https:\/\/www\.youtube\.com\/watch\?v=).{11}>(https:\/\/www\.youtube\.com\/watch\?v=)).*?(?=<\/a>)/g)
             if (youtubeUrlRegex.test(this.topic.description)) {
-                this.topic.description.match(youtubeUrlRegex).map(youtubeLinkWithAnchors => {
-                    let youtubeLinkWithoutAnchors = youtubeLinkWithAnchors.match(this.urlRegex)[0].substr(32)
-                    let videoUrl = 'https://www.youtube.com/embed/' + youtubeLinkWithoutAnchors;
-                    this.topic.description = this.topic.description.replace(youtubeLinkWithAnchors, `<iframe max-width="100%" width="752" height="423" src="${videoUrl}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`)
+                this.topic.description.match(youtubeUrlRegex).map(videoId => {
+                    let youtubeLinkWithAnchors = `<a href=https://www.youtube.com/watch?v=${videoId}>https://www.youtube.com/watch?v=${videoId}</a>`
+                    let videoUrl = 'https://www.youtube.com/embed/' + videoId;
+                    this.topic.description = this.topic.description.replace(youtubeLinkWithAnchors, `<iframe max-width="100%" width="100%" height="423" src="${videoUrl}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`)
                 })
             }
-
-            this.userService.getUserByName(this.topic.author).subscribe(data => {
-                this.user = data
-            })
+            
         })
     }
 

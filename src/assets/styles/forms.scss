@@ -132,6 +132,21 @@
         textarea {
             height: 17.9375rem;
         }
+        .bbcode {
+            i {
+                padding: .5rem;
+                background: $secondary-bg-color;
+                margin-right: .3rem;
+                color: $secondary-color;
+                cursor: pointer;
+                font-size: .9rem;
+
+                &:hover {
+                    transition: background-color .5s ease;
+                    background: $blue;
+                }
+            }
+        }
     }
     aside {
         flex: 1 1 25%;

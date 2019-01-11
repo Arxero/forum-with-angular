@@ -27,7 +27,7 @@
             </div>
             <div class="meta"><i class="fas fa-file-alt"></i> by <a routerLink='/user/details/{{reply.author}}'>{{reply.author}}</a> »
                 {{reply._kmd.ect | date: 'yyyy-MM-dd HH:mm:ss'}}</div>
-            <div class="post-description">{{reply.content}}</div>
+            <div class="post-description" [innerHTML]='reply.content | safe: "html"'></div>
         </div>
     </div>
 </ng-container>
@@ -38,6 +38,11 @@
     <div class="form-wrapper topic reply" *ngIf="authService.isLoggedIn()">
         <form (ngSubmit)='addReply()' #addReplyForm='ngForm'>
             <p class="post-title">Quick Reply</p>
+            <div class="bbcode">
+                    <i (click)='insertImageTags()' class="fas fa-image" title="Insert image: [img]http://image_url[/img]"></i>
+                    <i (click)='insertVideoTags()' class="fas fa-tv" title="Insert video: [video]http://video_url[/video]"></i>
+                    <i (click)='insertAudioTags()' class="fas fa-music" title="Insert audio: [audio]http://audio_url[/audio]"></i>
+            </div>
             <p>
                 <textarea [(ngModel)]="replyModel.content" #content='ngModel' name="content" placeholder="Write something..."
                     required></textarea>

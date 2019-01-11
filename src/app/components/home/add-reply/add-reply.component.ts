@@ -24,6 +24,7 @@ export class AddReplyComponent implements OnInit {
     topicModel: AddTopicModel
     users: any
     user: UserModel
+    urlRegex: any = new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g)
 
     @Input('topicId') topicId: string;
     @Input('topicTitle') topicTitle: string;
@@ -56,7 +57,62 @@ export class AddReplyComponent implements OnInit {
                     this.users.splice(i--, 1)
                 }
             })
+
+
+            this.replies.map(reply => {
+                //looking for new lines and if there is replace it with break
+                reply.content = reply.content.replace(new RegExp('\n', 'g'), "<br/>")
+
+                //looking for urls in the post and if there is make them clickable
+                let urlRegexNoImgTag = new RegExp(/(?<!])https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g)
+                if (urlRegexNoImgTag.test(reply.content)) {
+                    reply.content.match(urlRegexNoImgTag).map(url => {
+                        reply.content = reply.content.replace(url, `<a href=${url}>${url}</a>`)
+                    })
+                }
+
+                //looking for bbcode for image and if there is one or more, display the image
+                let imageRegexWithTags = new RegExp(/\[img]https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)\[\/img]/g)
+                let imageRegexWithoutTags = new RegExp(/(?<=\[img])https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)(?=\[\/img])/g)
+                if (imageRegexWithTags.test(reply.content)) {
+                    reply.content.match(imageRegexWithTags).map(imageUrlWithTags => {
+                        let imageUrlWithoutTags = imageUrlWithTags.match(imageRegexWithoutTags)[0]
+
+                        reply.content = reply.content.replace(imageUrlWithTags, `<img src="${imageUrlWithoutTags}" alt="image" class="post-image">`)
+                    })
+                }
+
+                //looking for video link ending like .mp4
+                let videoTagRegexWithTags = new RegExp(/\[video]https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)\[\/video]/g)
+                if (videoTagRegexWithTags.test(reply.content)) {
+                    reply.content.match(videoTagRegexWithTags).map(videoUrlWithTags => {
+                        let videoUrlWithoutTags = videoUrlWithTags.match(this.urlRegex)[0]
+                        reply.content = reply.content.replace(videoUrlWithTags, `<video src="${videoUrlWithoutTags}" controls="controls" width=100%>Please upgrade to a browser which supports HTML 5.</video>`)
+                    })
+                }
+
+                //looking for audio links ending like .mp3
+                let audioTagRegexWithTags = new RegExp(/\[audio]https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)\[\/audio]/g)
+                if (audioTagRegexWithTags.test(reply.content)) {
+                    reply.content.match(audioTagRegexWithTags).map(audioUrlWithTags => {
+                        let audioUrlWithoutTags = audioUrlWithTags.match(this.urlRegex)[0]
+                        reply.content = reply.content.replace(audioUrlWithTags, `<audio src="${audioUrlWithoutTags}" controls="controls" width=100%>Please upgrade to a browser which supports HTML 5.</audio>`)
+                    })
+                }
+
+                //looking for youtube url in order to embed the video directly
+                let youtubeUrlRegex = new RegExp(/(?<=(<a href=https:\/\/www\.youtube\.com\/watch\?v=).{11}>(https:\/\/www\.youtube\.com\/watch\?v=)).*?(?=<\/a>)/g)
+                if (youtubeUrlRegex.test(reply.content)) {
+                    reply.content.match(youtubeUrlRegex).map(videoId => {
+                        let youtubeLinkWithAnchors = `<a href=https://www.youtube.com/watch?v=${videoId}>https://www.youtube.com/watch?v=${videoId}</a>`
+                        let videoUrl = 'https://www.youtube.com/embed/' + videoId;
+                        reply.content = reply.content.replace(youtubeLinkWithAnchors, `<iframe max-width="100%" width="100%" height="423" src="${videoUrl}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`)
+                    })
+                }
+            })
+
         })
+
     }
 
     addReply() {
@@ -65,6 +121,61 @@ export class AddReplyComponent implements OnInit {
             this.replyService.getCommentsByTopicId(this.topicId).subscribe(data => {
                 this.replies = data
                 this.replyModel.content = ''
+
+                ///////////////////
+                this.replies.map(reply => {
+                    //looking for new lines and if there is replace it with break
+                    reply.content = reply.content.replace(new RegExp('\n', 'g'), "<br/>")
+    
+                    //looking for urls in the post and if there is make them clickable
+                    let urlRegexNoImgTag = new RegExp(/(?<!])https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g)
+                    if (urlRegexNoImgTag.test(reply.content)) {
+                        reply.content.match(urlRegexNoImgTag).map(url => {
+                            reply.content = reply.content.replace(url, `<a href=${url}>${url}</a>`)
+                        })
+                    }
+    
+                    //looking for bbcode for image and if there is one or more, display the image
+                    let imageRegexWithTags = new RegExp(/\[img]https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)\[\/img]/g)
+                    let imageRegexWithoutTags = new RegExp(/(?<=\[img])https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)(?=\[\/img])/g)
+                    if (imageRegexWithTags.test(reply.content)) {
+                        reply.content.match(imageRegexWithTags).map(imageUrlWithTags => {
+                            let imageUrlWithoutTags = imageUrlWithTags.match(imageRegexWithoutTags)[0]
+    
+                            reply.content = reply.content.replace(imageUrlWithTags, `<img src="${imageUrlWithoutTags}" alt="image" class="post-image">`)
+                        })
+                    }
+    
+                    //looking for video link ending like .mp4
+                    let videoTagRegexWithTags = new RegExp(/\[video]https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)\[\/video]/g)
+                    if (videoTagRegexWithTags.test(reply.content)) {
+                        reply.content.match(videoTagRegexWithTags).map(videoUrlWithTags => {
+                            let videoUrlWithoutTags = videoUrlWithTags.match(this.urlRegex)[0]
+                            reply.content = reply.content.replace(videoUrlWithTags, `<video src="${videoUrlWithoutTags}" controls="controls" width=100%>Please upgrade to a browser which supports HTML 5.</video>`)
+                        })
+                    }
+    
+                    //looking for audio links ending like .mp3
+                    let audioTagRegexWithTags = new RegExp(/\[audio]https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)\[\/audio]/g)
+                    if (audioTagRegexWithTags.test(reply.content)) {
+                        reply.content.match(audioTagRegexWithTags).map(audioUrlWithTags => {
+                            let audioUrlWithoutTags = audioUrlWithTags.match(this.urlRegex)[0]
+                            reply.content = reply.content.replace(audioUrlWithTags, `<audio src="${audioUrlWithoutTags}" controls="controls" width=100%>Please upgrade to a browser which supports HTML 5.</audio>`)
+                        })
+                    }
+    
+                    //looking for youtube url in order to embed the video directly
+                    let youtubeUrlRegex = new RegExp(/(?<=(<a href=https:\/\/www\.youtube\.com\/watch\?v=).{11}>(https:\/\/www\.youtube\.com\/watch\?v=)).*?(?=<\/a>)/g)
+                    if (youtubeUrlRegex.test(reply.content)) {
+                        reply.content.match(youtubeUrlRegex).map(videoId => {
+                            let youtubeLinkWithAnchors = `<a href=https://www.youtube.com/watch?v=${videoId}>https://www.youtube.com/watch?v=${videoId}</a>`
+                            let videoUrl = 'https://www.youtube.com/embed/' + videoId;
+                            reply.content = reply.content.replace(youtubeLinkWithAnchors, `<iframe max-width="100%" width="100%" height="423" src="${videoUrl}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`)
+                        })
+                    }
+                })
+
+                ////////////////
 
                 //this is to increase reply count on the topic in forums page
                 this.topicService.getSingleTopic(this.topicId).subscribe(data => {
@@ -117,6 +228,16 @@ export class AddReplyComponent implements OnInit {
     addEmoji(event) {
         let emoji = event.target.innerText
         this.replyModel.content += emoji
+    }
+
+    insertImageTags() {
+        this.replyModel.content += '[img][/img]'
+    }
+    insertVideoTags() {
+        this.replyModel.content += '[video][/video]'
+    }
+    insertAudioTags() {
+        this.replyModel.content += '[audio][/audio]'
     }
 
 }

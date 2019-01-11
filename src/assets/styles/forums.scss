@@ -90,6 +90,19 @@
         margin-top: 1.5rem;
         background: $primary-bg-color;
     }
+    .preview-wrapper {
+        padding-bottom: 1rem;
+        .preview {
+            background: $primary-bg-color;
+            padding: 1rem;
+            padding-bottom: 2rem;
+            &-title {
+                color: $secondary-color;
+                font-size: 1.1rem;
+                padding-bottom: 1rem;
+            }
+        }
+    }
 }
 
 .post {
@@ -165,4 +178,7 @@
             }
         }
     }
+
 }
+
+

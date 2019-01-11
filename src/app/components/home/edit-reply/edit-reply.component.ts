@@ -46,5 +46,14 @@ export class EditReplyComponent implements OnInit {
         let emoji = event.target.innerText
         this.replyModel.content += emoji
     }
+    insertImageTags() {
+        this.replyModel.content += '[img][/img]'
+    }
+    insertVideoTags() {
+        this.replyModel.content += '[video][/video]'
+    }
+    insertAudioTags() {
+        this.replyModel.content += '[audio][/audio]'
+    }
 
 }

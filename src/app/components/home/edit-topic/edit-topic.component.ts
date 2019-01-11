@@ -50,5 +50,14 @@ export class EditTopicComponent implements OnInit {
         let emoji = asd.target.innerText
         this.editTopicModel.description += emoji
     }
+    insertImageTags() {
+        this.editTopicModel.description += '[img][/img]'
+    }
+    insertVideoTags() {
+        this.editTopicModel.description += '[video][/video]'
+    }
+    insertAudioTags() {
+        this.editTopicModel.description += '[audio][/audio]'
+    }
 
 }

@@ -13,13 +13,14 @@ import { UserModel } from 'src/app/core/models/auth-models/user.model';
 })
 export class AddTopicComponent implements OnInit {
     addTopicModel: AddTopicModel
-    forumId : string
+    alteredDescription: string
+    forumId: string
     forumName: Object = {
-        '1' : 'Announcements',
-        '2' : 'VIP Application',
-        '3' : 'Admin Application',
-        '4' : 'Suggestions',
-        '5' : 'Cafeteria',
+        '1': 'Announcements',
+        '2': 'VIP Application',
+        '3': 'Admin Application',
+        '4': 'Suggestions',
+        '5': 'Cafeteria',
     }
     user: UserModel
 
@@ -33,6 +34,7 @@ export class AddTopicComponent implements OnInit {
         this.addTopicModel = new AddTopicModel('', '', author, forumId, 0)
 
         this.forumId = this.route.snapshot.params['id']
+
     }
 
     ngOnInit() {
@@ -46,10 +48,49 @@ export class AddTopicComponent implements OnInit {
                 this.userService.editUserById(this.user, this.user._id).subscribe()
             })
         })
-        
+
     }
+
+    convertBBCode() {
+        //console.log('yes');
+        console.log(this.alteredDescription);
+        this.alteredDescription = ''
+        //looking for new lines and if there is replace it with break
+        this.addTopicModel.description = this.addTopicModel.description.replace(new RegExp('\n', 'g'), "<br/>")
+    
+        //looking for urls in the post and if there is make them clickable
+        // let urlRegexNoImgTag = new RegExp(/(?<!])https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g)
+        // if (urlRegexNoImgTag.test(this.addTopicModel.description)) {
+            
+        //     this.addTopicModel.description.match(urlRegexNoImgTag).map(url => {
+        //         this.alteredDescription = this.addTopicModel.description.replace(url, `<a href=${url}>${url}</a>`)
+        //     })
+        // }
+
+        //looking for bbcode for image and if there is one or more, display the image
+        let imageRegexWithTags = new RegExp(/\[img]https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)\[\/img]/g)
+        let imageRegexWithoutTags = new RegExp(/(?<=\[img])https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)(?=\[\/img])/g)
+        if (imageRegexWithTags.test(this.addTopicModel.description)) {
+            this.addTopicModel.description.match(imageRegexWithTags).map(imageUrlWithTags => {
+                let imageUrlWithoutTags = imageUrlWithTags.match(imageRegexWithoutTags)[0]
+                
+                this.addTopicModel.description = this.addTopicModel.description.replace(imageUrlWithTags, `<img src="${imageUrlWithoutTags}" alt="image" class="post-image">`)
+            })
+        }
+    }
+
+
     addEmoji(event) {
         let emoji = event.target.innerText
         this.addTopicModel.description += emoji
+    }
+    insertImageTags() {
+        this.addTopicModel.description += '[img][/img]'
+    }
+    insertVideoTags() {
+        this.addTopicModel.description += '[video][/video]'
+    }
+    insertAudioTags() {
+        this.addTopicModel.description += '[audio][/audio]'
     }
 }
