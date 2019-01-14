@@ -5,6 +5,13 @@
         <a class="single-forum-title" routerLink="/view/forum/{{forumId}}/viewtopic/{{topicId}}">{{editTopicModel.subject}}</a>
     </div>
 
+    <div class="preview-wrapper" *ngIf="alteredDescription">
+        <div class="preview">
+            <div class="preview-title">Preview: {{editTopicModel.subject}}</div>
+            <div class="preview-content" [innerHTML]='alteredDescription | safe: "html"'></div>
+        </div>
+    </div>
+
     <div class="form-wrapper topic" *ngIf="editTopicModel">
         <form (ngSubmit)='editTopic()' #editTopicForm='ngForm'>
             <p class="post-title">Edit your topic</p>
@@ -13,9 +20,10 @@
                     required>
             </p>
             <div class="bbcode">
-                    <i (click)='insertImageTags()' class="fas fa-image" title="Insert image: [img]http://image_url[/img]"></i>
-                    <i (click)='insertVideoTags()' class="fas fa-tv" title="Insert video: [video]http://video_url[/video]"></i>
-                    <i (click)='insertAudioTags()' class="fas fa-music" title="Insert audio: [audio]http://audio_url[/audio]"></i>
+                <i (click)='insertImageTags()' class="fas fa-image" title="Insert image: [img]http://image_url[/img]"></i>
+                <i (click)='insertVideoTags()' class="fas fa-tv" title="Insert video: [video]http://video_url[/video]"></i>
+                <i (click)='insertAudioTags()' class="fas fa-music" title="Insert audio: [audio]http://audio_url[/audio]"></i>
+                <i (click)='convertBBCode()' class="far fa-eye" title="Preview your post"></i>
             </div>
 
             <p>

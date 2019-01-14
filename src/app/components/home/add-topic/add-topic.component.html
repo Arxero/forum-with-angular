@@ -3,10 +3,10 @@
         <a class="single-forum-title" routerLink="../../../forum/{{forumId}}">{{forumName[[(forumId)]]}}</a>
     </div>
 
-    <div class="preview-wrapper">
+    <div class="preview-wrapper" *ngIf="alteredDescription">
         <div class="preview">
             <div class="preview-title">Preview: {{addTopicModel.subject}}</div>
-            <div class="preview-content" [innerHTML]='addTopicModel.description | safe: "html"'></div>
+            <div class="preview-content" [innerHTML]='alteredDescription | safe: "html"'></div>
         </div>
     </div>
 
